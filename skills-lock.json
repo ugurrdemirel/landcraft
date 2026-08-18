@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "skills": {
+    "anti-ui-slop": {
+      "source": "uizze.com",
+      "sourceUrl": "https://uizze.com/",
+      "sourceType": "well-known",
+      "computedHash": "912fa42871e7981df32006c4bdcd6314215f58e7e6ddf94d51d53b594c0322a0",
+      "wellKnownDigest": "sha256:416f7d178891016ee9b41270fe5b7ee6c80a502278d2e3aac4bd06fdc4207fb5"
+    },
+    "saas-ui-master": {
+      "source": "shovonsheikh/saas-ui-master",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "f66147b8d8abbdef7926fb5bab01c732af5ee1002316928725bd051f88bb10db"
+    },
+    "site-architecture": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/site-architecture/SKILL.md",
+      "computedHash": "48a38c5e2b000d134c3db282364b1014bad362fa91d4618ad8c2eb7cee991208"
+    },
+    "ui-design": {
+      "source": "uizze.com",
+      "sourceUrl": "https://uizze.com/",
+      "sourceType": "well-known",
+      "computedHash": "c163b0a641f0212e5a5d44c53210d0b7547570ecf34bcb8d881f8716f33f4332",
+      "wellKnownDigest": "sha256:9ba2f4aea4a6367ab830e95dd856448ca17409884596e3e2878b821aeec8b4e5"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/web-design-guidelines/SKILL.md",
+      "computedHash": "f3bc47f890f42a44db1007ab390709ec368e4b8c089baee6b0007182236ac474"
+    }
+  }
+}

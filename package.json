@@ -1,0 +1,14 @@
+{
+  "name": "marketing-ui-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Monorepo for the marketing-focused React component library (token-based theming, contrast guarantees) and its Storybook playground.",
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "build": "pnpm --filter @marketing-ui/core build",
+    "storybook": "pnpm --filter @marketing-ui/storybook storybook",
+    "build:storybook": "pnpm --filter @marketing-ui/storybook build:storybook",
+    "typecheck": "pnpm -r typecheck",
+    "clean": "pnpm -r clean"
+  }
+}

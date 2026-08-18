@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { BlogSection, BlogCard, type BlogPost } from "@marketing-ui/core";
+import { BlogSection, BlogCard, type BlogPost } from "@ugurdemirel/landcraft";
 
 const posts: BlogPost[] = [
   {

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { FAQ } from "@marketing-ui/core";
+import { FAQ } from "@ugurdemirel/landcraft";
 
 const meta = {
   title: "Components/FAQ",
@@ -17,7 +17,7 @@ const meta = {
       {
         question: "How do I install the components?",
         answer:
-          "Install the package with `pnpm add @marketing-ui/core` and import `@marketing-ui/core/styles.css`. You can override the color tokens in your own CSS.",
+          "Install the package with `pnpm add @ugurdemirel/landcraft` and import `@ugurdemirel/landcraft/styles.css`. You can override the color tokens in your own CSS.",
       },
       {
         question: "How do I change the colors?",

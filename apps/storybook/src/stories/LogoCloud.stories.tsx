@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { LogoCloud } from "@marketing-ui/core";
+import { LogoCloud } from "@ugurdemirel/landcraft";
 
 const meta = {
   title: "Components/LogoCloud",

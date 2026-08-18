@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Pricing, type Plan } from "@marketing-ui/core";
+import { Pricing, type Plan } from "@ugurdemirel/landcraft";
 
 const meta = {
   title: "Components/Pricing",

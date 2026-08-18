@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Badge, Zap } from "@marketing-ui/core";
+import { Badge, Zap } from "@ugurdemirel/landcraft";
 
 const meta = {
   title: "Components/Badge",

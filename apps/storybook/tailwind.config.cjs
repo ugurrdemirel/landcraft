@@ -1,4 +1,4 @@
-const preset = require("@marketing-ui/core/tailwind-preset");
+const preset = require("@ugurdemirel/landcraft/tailwind-preset");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {

@@ -23,7 +23,7 @@ import {
   Zap,
   ShieldCheck,
   Gauge,
-} from "@marketing-ui/core";
+} from "@ugurdemirel/landcraft";
 
 const meta: Meta = {
   title: "Templates/Developer Tools",
@@ -41,11 +41,11 @@ const TerminalWindow = () => (
       <span className="ml-3 font-mono text-xs text-white/40">~ acurio init --deploy</span>
     </div>
     <div className="space-y-1.5 px-5 py-5 font-mono text-[13px] leading-6">
-      <p className="text-white/30">$ pnpm add @marketing-ui/core</p>
+      <p className="text-white/30">$ pnpm add @ugurdemirel/landcraft</p>
       <p className="text-white/70">
         <span className="text-emerald-400">✓</span> added 1 package in 412ms
       </p>
-      <p className="text-white/30">$ import <span className="text-sky-300">"@marketing-ui/core/styles.css"</span></p>
+      <p className="text-white/30">$ import <span className="text-sky-300">"@ugurdemirel/landcraft/styles.css"</span></p>
       <p className="text-white/70">
         <span className="text-emerald-400">✓</span> tokens loaded · font-display + font-sans
       </p>
@@ -179,7 +179,7 @@ export const DeveloperTools: StoryObj = {
           description="Can't find the answer? Open an issue on GitHub — usually answered within 24 hours."
           items={[
             { question: "Does it work with Next.js?", answer: "Yes — works with React 18+ and any Vite-based setup." },
-            { question: "Can I get the CSS tokens as JSON?", answer: "Yes — the `@marketing-ui/core/tokens` export exists." },
+            { question: "Can I get the CSS tokens as JSON?", answer: "Yes — the `@ugurdemirel/landcraft/tokens` export exists." },
             { question: "Can I use my own icon set?", answer: "Icons are fully swappable; the default set is emoji-free and stroke-based." },
           ]}
         />
@@ -231,7 +231,7 @@ export const ApiReference: StoryObj = {
             { sig: "getContrastText(bg: string): string", desc: "Picks the most readable text color for a background using WCAG luminance." },
             { sig: "useTokenForeground('--color-primary')", desc: "Reads the live token and returns a theme-appropriate foreground color." },
             { sig: "<Navbar variant='floating' … />", desc: "Three navbar options: floating, blurred, and fully token-based." },
-            { sig: "import('@marketing-ui/core/tailwind-preset')", desc: "A tone, font, and radius preset for your own Tailwind project." },
+            { sig: "import('@ugurdemirel/landcraft/tailwind-preset')", desc: "A tone, font, and radius preset for your own Tailwind project." },
           ].map((item) => (
             <div key={item.sig} className="overflow-hidden rounded-xl border border-border bg-surface">
               <div className="flex items-center gap-3 bg-surface-strong px-5 py-3.5">

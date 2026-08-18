@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Prose, ProseLead } from "@marketing-ui/core";
+import { Prose, ProseLead } from "@ugurdemirel/landcraft";
 
 const meta = {
   title: "Components/Prose",
@@ -58,8 +58,8 @@ export const BlogArticle: Story = {
           <li>The same <code>option</code> contract on every component.</li>
         </ul>
         <h3>Code block</h3>
-        <pre><code>{`import { Button } from "@marketing-ui/core";
-import "@marketing-ui/core/styles.css";
+        <pre><code>{`import { Button } from "@ugurdemirel/landcraft";
+import "@ugurdemirel/landcraft/styles.css";
 
 // Single-line theme override:
 // --color-primary: 79 70 229;`}</code></pre>

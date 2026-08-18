@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button, Badge, ArrowRight, Palette, ShieldCheck, Gauge } from "@marketing-ui/core";
+import { Button, Badge, ArrowRight, Palette, ShieldCheck, Gauge } from "@ugurdemirel/landcraft";
 
 const meta: Meta = {
   title: "Intro/Getting Started",

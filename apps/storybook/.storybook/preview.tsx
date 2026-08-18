@@ -3,7 +3,7 @@ import type { Preview } from "@storybook/react";
 // App-level utilities first, core styles LAST so the library's responsive
 // rules (md:flex, md:hidden, …) win the cascade.
 import "../src/index.css";
-import "@marketing-ui/core/styles.css";
+import "@ugurdemirel/landcraft/styles.css";
 import { palettes, type Palette } from "../src/palettes";
 
 function findPalette(name: string | undefined): Palette {

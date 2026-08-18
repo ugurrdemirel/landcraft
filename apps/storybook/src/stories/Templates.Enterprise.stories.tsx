@@ -20,7 +20,7 @@ import {
   Globe,
   Lock,
   Database,
-} from "@marketing-ui/core";
+} from "@ugurdemirel/landcraft";
 
 const meta: Meta = {
   title: "Templates/Enterprise SaaS",
@@ -193,7 +193,7 @@ export const EnterpriseSaaS: StoryObj = {
             ))}
           </>
         }
-        bottom="Made with @marketing-ui/core"
+        bottom="Made with @ugurdemirel/landcraft"
       />
     </div>
   ),

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Footer, Newsletter } from "@marketing-ui/core";
+import { Footer, Newsletter } from "@ugurdemirel/landcraft";
 
 const meta = {
   title: "Components/Footer",
@@ -33,7 +33,7 @@ const meta = {
         ))}
       </>
     ),
-    bottom: "Made with @marketing-ui/core",
+    bottom: "Made with @ugurdemirel/landcraft",
   },
 } satisfies Meta<typeof Footer>;
 

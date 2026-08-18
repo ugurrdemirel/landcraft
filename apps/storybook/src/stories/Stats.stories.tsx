@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Stats, Users, Globe, Zap, BarChart, Clock } from "@marketing-ui/core";
+import { Stats, Users, Globe, Zap, BarChart, Clock } from "@ugurdemirel/landcraft";
 
 const meta = {
   title: "Components/Stats",

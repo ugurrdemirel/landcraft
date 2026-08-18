@@ -10,7 +10,7 @@ importers:
 
   apps/storybook:
     dependencies:
-      '@marketing-ui/core':
+      '@ugurdemirel/landcraft':
         specifier: workspace:*
         version: link:../../packages/ui
       react:

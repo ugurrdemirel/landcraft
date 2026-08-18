@@ -1,5 +1,5 @@
 /**
- * Tailwind preset for @marketing-ui/core.
+ * Tailwind preset for @ugurdemirel/landcraft.
  *
  * Every design decision (color, type, radius, shadow) is driven by CSS custom
  * properties so consumers can re-skin the whole library from outside without

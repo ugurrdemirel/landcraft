@@ -23,7 +23,7 @@ import {
   Star,
   Users,
   Rocket,
-} from "@marketing-ui/core";
+} from "@ugurdemirel/landcraft";
 
 const meta: Meta = {
   title: "Templates/Launch · Dark",
@@ -168,7 +168,7 @@ export const LaunchDark: StoryObj = {
           { title: "Company", links: [{ label: "About", href: "#" }, { label: "Blog", href: "#" }, { label: "Careers", href: "#" }] },
           { title: "Legal", links: [{ label: "Privacy", href: "#" }, { label: "Terms", href: "#" }] },
         ]}
-        bottom="Made with @marketing-ui/core"
+        bottom="Made with @ugurdemirel/landcraft"
       />
     </div>
   ),

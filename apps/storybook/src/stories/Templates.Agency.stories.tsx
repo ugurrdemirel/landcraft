@@ -19,7 +19,7 @@ import {
   Mail,
   Quote,
   Zap,
-} from "@marketing-ui/core";
+} from "@ugurdemirel/landcraft";
 
 const meta: Meta = {
   title: "Templates/Agency · Editorial",

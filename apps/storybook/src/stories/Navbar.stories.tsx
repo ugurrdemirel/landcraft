@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Navbar, Button, ArrowUpRight } from "@marketing-ui/core";
+import { Navbar, Button, ArrowUpRight } from "@ugurdemirel/landcraft";
 
 const meta = {
   title: "Components/Navbar",

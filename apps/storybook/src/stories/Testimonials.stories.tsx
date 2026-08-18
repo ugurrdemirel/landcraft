@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Testimonials, type Testimonial } from "@marketing-ui/core";
+import { Testimonials, type Testimonial } from "@ugurdemirel/landcraft";
 
 const items: Testimonial[] = [
   {

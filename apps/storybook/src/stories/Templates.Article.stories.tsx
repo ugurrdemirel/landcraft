@@ -10,7 +10,7 @@ import {
   ArrowRight,
   Clock,
   Star,
-} from "@marketing-ui/core";
+} from "@ugurdemirel/landcraft";
 
 const meta: Meta = {
   title: "Templates/Article",

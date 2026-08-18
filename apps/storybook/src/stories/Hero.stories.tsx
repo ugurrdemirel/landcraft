@@ -7,7 +7,7 @@ import {
   Star,
   Users,
   Rocket,
-} from "@marketing-ui/core";
+} from "@ugurdemirel/landcraft";
 
 const meta = {
   title: "Components/Hero",

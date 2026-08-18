@@ -8,7 +8,7 @@ import {
   Layers,
   Gauge,
   Cpu,
-} from "@marketing-ui/core";
+} from "@ugurdemirel/landcraft";
 
 const meta = {
   title: "Components/Features",

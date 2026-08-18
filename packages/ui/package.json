@@ -1,6 +1,13 @@
 {
-  "name": "@marketing-ui/core",
+  "name": "@ugurdemirel/landcraft",
   "version": "0.1.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ugurrdemirel/landcraft.git"
+  },
   "description": "Marketing/landing-page focused React component library built on Tailwind CSS with token-based theming and automatic contrast.",
   "type": "module",
   "main": "./dist/index.cjs",

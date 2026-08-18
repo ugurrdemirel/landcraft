@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Newsletter } from "@marketing-ui/core";
+import { Newsletter } from "@ugurdemirel/landcraft";
 
 const meta = {
   title: "Components/Newsletter",

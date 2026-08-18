@@ -9,7 +9,7 @@ import {
   Button,
   Badge,
   ArrowUpRight,
-} from "@marketing-ui/core";
+} from "@ugurdemirel/landcraft";
 
 const meta = {
   title: "Components/Card",

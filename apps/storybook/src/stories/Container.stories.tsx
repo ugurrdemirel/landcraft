@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Container, Stack, Button, Badge } from "@marketing-ui/core";
+import { Container, Stack, Button, Badge } from "@ugurdemirel/landcraft";
 
 const meta = {
   title: "Components/Layout",

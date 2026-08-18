@@ -19,7 +19,7 @@ import {
   Zap,
   Palette,
   ShieldCheck,
-} from "@marketing-ui/core";
+} from "@ugurdemirel/landcraft";
 
 const meta: Meta = {
   title: "Templates/Waitlist",

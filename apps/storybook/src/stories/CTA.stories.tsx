@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { CTA, Button, ArrowRight } from "@marketing-ui/core";
+import { CTA, Button, ArrowRight } from "@ugurdemirel/landcraft";
 
 const meta = {
   title: "Components/CTA",

@@ -1,4 +1,4 @@
-# Marketing UI — Monorepo
+# Landcraft — Monorepo
 
 A React component library for landing / marketing pages plus a Storybook playground.
 Built on Tailwind CSS, token-based theming, with contrast guarantees.
@@ -6,8 +6,8 @@ Built on Tailwind CSS, token-based theming, with contrast guarantees.
 ## Structure
 
 ```
-marketing-ui/
-├─ packages/ui/          @marketing-ui/core — component library
+landcraft/
+├─ packages/ui/          @ugurdemirel/landcraft — component library
 │  ├─ src/components/    Button, Badge, Card, Section, Hero, Features,
 │  │                     Stats, Pricing, Testimonials, CTA, Navbar,
 │  │                     Footer, FAQ, Newsletter, LogoCloud, Blog, Prose,
@@ -21,7 +21,7 @@ marketing-ui/
 
 ```bash
 pnpm install                 # install dependencies
-pnpm build                   # builds @marketing-ui/core (JS + CSS + types)
+pnpm build                   # builds @ugurdemirel/landcraft (JS + CSS + types)
 pnpm storybook               # starts Storybook (http://localhost:6006)
 pnpm build:storybook         # produces a static Storybook build (storybook-static/)
 pnpm typecheck               # typechecks all packages
@@ -51,12 +51,12 @@ pnpm typecheck               # typechecks all packages
 ## Using the library in your own project
 
 ```bash
-pnpm add @marketing-ui/core
+pnpm add @ugurdemirel/landcraft
 ```
 
 ```tsx
-import { Button, Hero } from "@marketing-ui/core";
-import "@marketing-ui/core/styles.css";
+import { Button, Hero } from "@ugurdemirel/landcraft";
+import "@ugurdemirel/landcraft/styles.css";
 ```
 
 Or reuse the preset in your own Tailwind project:
@@ -64,7 +64,7 @@ Or reuse the preset in your own Tailwind project:
 ```js
 // tailwind.config.js
 module.exports = {
-  presets: [require("@marketing-ui/core/tailwind-preset")],
+  presets: [require("@ugurdemirel/landcraft/tailwind-preset")],
   content: [/* your content */],
 };
 ```

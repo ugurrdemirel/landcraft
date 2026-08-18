@@ -1,4 +1,4 @@
-# @marketing-ui/core
+# @ugurdemirel/landcraft
 
 Landing / marketing-focused React component library.
 One consistent design language — paper surfaces, ink text, a single accent — with
@@ -7,20 +7,20 @@ multiple visual options per component.
 ## Install
 
 ```bash
-pnpm add @marketing-ui/core
+pnpm add @ugurdemirel/landcraft
 # peers: react >=18, tailwindcss ^3.4
 ```
 
 ```tsx
-import { Button, Hero } from "@marketing-ui/core";
-import "@marketing-ui/core/styles.css";
+import { Button, Hero } from "@ugurdemirel/landcraft";
+import "@ugurdemirel/landcraft/styles.css";
 ```
 
 Add the preset to your own Tailwind project:
 
 ```js
 module.exports = {
-  presets: [require("@marketing-ui/core/tailwind-preset")],
+  presets: [require("@ugurdemirel/landcraft/tailwind-preset")],
   content: [/* … */],
 };
 ```
@@ -90,7 +90,7 @@ them from the package.
 across Section, Footer, CTA and BlogSection (`mx-auto w-full max-w-* px-5 sm:px-8`):
 
 ```tsx
-import { Container, Stack } from "@marketing-ui/core";
+import { Container, Stack } from "@ugurdemirel/landcraft";
 
 <Container size="xl">          // sm | md | lg | xl | full
   <Stack gap={8}>              // vertical rhythm (0–20)
@@ -108,11 +108,11 @@ same tokens (headings use `--font-display`, `<pre>` uses the ink surface, both `
 and `prose-neutral` adapt to the palette):
 
 ```bash
-pnpm add @marketing-ui/core @tailwindcss/typography
+pnpm add @ugurdemirel/landcraft @tailwindcss/typography
 ```
 
 ```tsx
-import { Prose, ProseLead } from "@marketing-ui/core";
+import { Prose, ProseLead } from "@ugurdemirel/landcraft";
 
 <Prose size="lg">
   <ProseLead>Intro paragraph…</ProseLead>

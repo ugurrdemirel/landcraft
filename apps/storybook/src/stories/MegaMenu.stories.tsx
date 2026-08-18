@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { MegaMenu, Button, ArrowUpRight } from "@marketing-ui/core";
+import { MegaMenu, Button, ArrowUpRight } from "@ugurdemirel/landcraft";
 
 const meta = {
   title: "Components/MegaMenu",

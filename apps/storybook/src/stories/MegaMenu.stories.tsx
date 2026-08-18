@@ -1,5 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { MegaMenu, Button, ArrowUpRight } from "@ugurdemirel/landcraft";
+import { MegaMenu, Button, ArrowUpRight, LanguageSwitcher } from "@ugurdemirel/landcraft";
+
+const languages = [
+  { code: "tr", label: "Türkçe" },
+  { code: "en", label: "English" },
+  { code: "de", label: "Deutsch" },
+];
 
 const meta = {
   title: "Components/MegaMenu",
@@ -163,6 +169,30 @@ export const Option2_Floating: Story = {
     docs: {
       description: {
         story: "A floating bar inset from the page. The panel inherits its width and soft shadow.",
+      },
+    },
+  },
+  decorators: [
+    (Story) => (
+      <div className="min-h-[26rem]">
+        <Story />
+      </div>
+    ),
+  ],
+};
+
+/** Floating bar with a language switcher on the right. */
+export const WithLanguageSwitcher: Story = {
+  name: "With language switcher (floating)",
+  args: {
+    variant: "floating",
+    languageSwitcher: <LanguageSwitcher languages={languages} showFlag />,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "The `languageSwitcher` slot renders on desktop next to the actions and beside the hamburger on mobile — the opened panel matches the floating bar's width.",
       },
     },
   },

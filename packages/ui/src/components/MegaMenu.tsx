@@ -49,6 +49,8 @@ export interface MegaMenuProps extends Omit<HTMLAttributes<HTMLElement>, "title"
   /** Rendered at the right side of the bar (desktop) and inside the mobile panel. */
   actions?: ReactNode;
   cta?: ReactNode;
+  /** Optional language switcher rendered on the right (desktop) and beside the menu button (mobile). */
+  languageSwitcher?: ReactNode;
   sticky?: boolean;
   /** Component used to render brand, trigger and panel links. Defaults to `<a>`. Pass your router's `<Link>` (Next.js, Remix, React Router…) for framework-aware navigation. */
   LinkComponent?: ElementType;
@@ -72,6 +74,7 @@ export const MegaMenu = ({
   items,
   actions,
   cta,
+  languageSwitcher,
   sticky = true,
   LinkComponent,
   onKeyDown,
@@ -323,9 +326,14 @@ export const MegaMenu = ({
         </ul>
 
         <div className="hidden items-center gap-3 lg:flex">
+          {languageSwitcher}
           {actions}
           {cta}
         </div>
+
+        {languageSwitcher ? (
+          <div className="flex items-center lg:hidden">{languageSwitcher}</div>
+        ) : null}
 
         <button
           type="button"
@@ -354,7 +362,8 @@ export const MegaMenu = ({
             aria-label={`${item.label} menu`}
             onMouseEnter={() => setOpenIndex(i)}
             className={cn(
-              "absolute inset-x-0 top-full z-50 pt-2 transition-all duration-150",
+              "absolute top-full z-50 pt-2 transition-all duration-150",
+              variant === "floating" ? "inset-x-0 mx-auto w-full max-w-5xl" : "inset-x-0",
               open
                 ? "visible translate-y-0 opacity-100"
                 : "pointer-events-none invisible -translate-y-1 opacity-0",

@@ -1,4 +1,4 @@
-import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
+import { forwardRef, type ElementType, type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "../utils/cn";
 import { ArrowRight, ArrowUpRight } from "../icons";
 import { Badge } from "./Badge";
@@ -41,6 +41,8 @@ function AuthorMark({ name, avatar }: { name: string; avatar?: ReactNode }) {
 export interface BlogCardProps extends HTMLAttributes<HTMLAnchorElement> {
   post: BlogPost;
   option?: "card" | "row";
+  /** Component used to render the card link. Defaults to `<a>`. Pass your router's `<Link>` (Next.js, Remix, React Router…) for framework-aware navigation. */
+  LinkComponent?: ElementType;
 }
 
 const Cover = ({ post }: { post: BlogPost }) =>
@@ -65,10 +67,12 @@ const Cover = ({ post }: { post: BlogPost }) =>
   );
 
 export const BlogCard = forwardRef<HTMLAnchorElement, BlogCardProps>(
-  ({ className, post, option = "card", ...props }, ref) => {
+  ({ className, post, option = "card", LinkComponent, ...props }, ref) => {
+    const Link = LinkComponent ?? "a";
+
     if (option === "row") {
       return (
-        <a
+        <Link
           ref={ref}
           href={post.href ?? "#"}
           className={cn("group flex cursor-pointer items-baseline gap-5 py-6", className)}
@@ -89,13 +93,13 @@ export const BlogCard = forwardRef<HTMLAnchorElement, BlogCardProps>(
           <span className="text-foreground/30 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-foreground">
             <ArrowUpRight className="h-5 w-5" />
           </span>
-        </a>
+        </Link>
       );
     }
 
     const author = post.author;
     return (
-      <a
+      <Link
         ref={ref}
         href={post.href ?? "#"}
         className={cn(
@@ -134,7 +138,7 @@ export const BlogCard = forwardRef<HTMLAnchorElement, BlogCardProps>(
             <ArrowRight className="h-4 w-4 text-foreground/35 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-foreground" />
           </div>
         </div>
-      </a>
+      </Link>
     );
   },
 );
@@ -153,6 +157,8 @@ export interface BlogSectionProps
   description?: ReactNode;
   showAllLabel?: string;
   showAllHref?: string;
+  /** Component used to render the "show all" link and post cards. Defaults to `<a>`. Pass your router's `<Link>` (Next.js, Remix, React Router…) for framework-aware navigation. */
+  LinkComponent?: ElementType;
 }
 
 const gridCols: Record<NonNullable<BlogSectionProps["columns"]>, string> = {
@@ -174,11 +180,13 @@ export const BlogSection = forwardRef<HTMLElement, BlogSectionProps>(
       description,
       showAllLabel,
       showAllHref,
+      LinkComponent,
       ...props
     },
     ref,
   ) => {
     const visible = limit ? posts.slice(0, limit) : posts;
+    const Link = LinkComponent ?? "a";
 
     return (
       <section ref={ref} className={cn("w-full py-20 sm:py-24", className)} {...props}>
@@ -211,13 +219,13 @@ export const BlogSection = forwardRef<HTMLElement, BlogSectionProps>(
                 ) : null}
               </div>
               {showAllHref ? (
-                <a
+                <Link
                   href={showAllHref}
                   className="group inline-flex shrink-0 cursor-pointer items-center gap-1.5 text-sm font-semibold text-foreground transition-colors duration-150 hover:text-primary"
                 >
                   {showAllLabel ?? "All posts"}
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-                </a>
+                </Link>
               ) : null}
             </div>
           )}
@@ -225,13 +233,13 @@ export const BlogSection = forwardRef<HTMLElement, BlogSectionProps>(
           {option === "row" ? (
             <div className="divide-y divide-border border-t border-border">
               {visible.map((post) => (
-                <BlogCard key={post.title} post={post} option="row" />
+                <BlogCard key={post.title} post={post} option="row" LinkComponent={LinkComponent} />
               ))}
             </div>
           ) : (
             <div className={cn("grid grid-cols-1 gap-4", gridCols[columns])}>
               {visible.map((post) => (
-                <BlogCard key={post.title} post={post} option="card" />
+                <BlogCard key={post.title} post={post} option="card" LinkComponent={LinkComponent} />
               ))}
             </div>
           )}

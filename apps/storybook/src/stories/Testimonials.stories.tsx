@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Testimonials, type Testimonial } from "@ugurdemirel/landcraft";
 
 const items: Testimonial[] = [

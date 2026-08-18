@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Button, Badge, ArrowRight, Palette, ShieldCheck, Gauge } from "@ugurdemirel/landcraft";
 
 const meta: Meta = {
@@ -28,7 +28,7 @@ export const Overview: StoryObj = {
         </p>
         <div className="flex flex-wrap gap-2">
           <Tag>React 18</Tag>
-          <Tag>Tailwind 3</Tag>
+          <Tag>Tailwind 4</Tag>
           <Tag>Space Grotesk + DM Sans</Tag>
           <Tag>WCAG contrast</Tag>
           <Tag>Storybook 8</Tag>

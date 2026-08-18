@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   Navbar,
   Hero,
@@ -231,7 +231,7 @@ export const ApiReference: StoryObj = {
             { sig: "getContrastText(bg: string): string", desc: "Picks the most readable text color for a background using WCAG luminance." },
             { sig: "useTokenForeground('--color-primary')", desc: "Reads the live token and returns a theme-appropriate foreground color." },
             { sig: "<Navbar variant='floating' … />", desc: "Three navbar options: floating, blurred, and fully token-based." },
-            { sig: "import('@ugurdemirel/landcraft/tailwind-preset')", desc: "A tone, font, and radius preset for your own Tailwind project." },
+            { sig: "import('@ugurdemirel/landcraft/theme.css')", desc: "A tone, font, and radius theme (Tailwind v4 CSS) for your own project." },
           ].map((item) => (
             <div key={item.sig} className="overflow-hidden rounded-xl border border-border bg-surface">
               <div className="flex items-center gap-3 bg-surface-strong px-5 py-3.5">

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Stats, Users, Globe, Zap, BarChart, Clock } from "@ugurdemirel/landcraft";
 
 const meta = {

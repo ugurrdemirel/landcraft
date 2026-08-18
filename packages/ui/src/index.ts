@@ -1,4 +1,5 @@
 export { Button, type ButtonProps, type ButtonVariant, type ButtonSize } from "./components/Button";
+export { Slot, type SlotProps } from "./components/Slot";
 export { Badge, type BadgeProps, type BadgeVariant, type BadgeSize } from "./components/Badge";
 export {
   Card,
@@ -48,6 +49,13 @@ export {
 export { CTA, type CTAProps } from "./components/CTA";
 export { FAQ, type FAQProps, type FaqItem } from "./components/FAQ";
 export { Footer, type FooterProps, type FooterColumn, type FooterLink } from "./components/Footer";
+export {
+  LanguageSwitcher,
+  type LanguageSwitcherProps,
+  type LanguageSwitcherOption,
+  type LanguageOption,
+} from "./components/LanguageSwitcher";
+export { Modal, type ModalProps } from "./components/Modal";
 export { Newsletter, type NewsletterProps } from "./components/Newsletter";
 export { Prose, ProseLead, type ProseProps, type ProseSize } from "./components/Prose";
 export {
@@ -70,6 +78,7 @@ export {
 export { cn } from "./utils/cn";
 export { getContrastText, type ColorInput } from "./utils/contrast";
 export { useTokenForeground } from "./utils/useTokenForeground";
+export { iso2ToFlagEmoji } from "./utils/iso2Flag";
 
 export {
   ArrowRight,

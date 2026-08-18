@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Container, Stack, Button, Badge } from "@ugurdemirel/landcraft";
 
 const meta = {

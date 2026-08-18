@@ -1,6 +1,7 @@
 import { forwardRef, type ButtonHTMLAttributes, type CSSProperties, type ReactNode } from "react";
 import { cn } from "../utils/cn";
 import { getContrastText } from "../utils/contrast";
+import { Slot } from "./Slot";
 
 export type ButtonVariant = "primary" | "dark" | "outline" | "ghost" | "link";
 export type ButtonSize = "sm" | "md" | "lg";
@@ -13,6 +14,13 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Paints the button with an arbitrary CSS color; text color is computed for contrast. */
   customColor?: string;
   fullWidth?: boolean;
+  /**
+   * When `true`, the button styling is applied to a single child element
+   * instead of a `<button>`. Use it to render a framework router `<Link>`
+   * (Next.js, Remix, React Router…). `iconLeft` / `iconRight` are ignored;
+   * pass icons inside the child instead.
+   */
+  asChild?: boolean;
 }
 
 const variants: Record<ButtonVariant, string> = {
@@ -43,6 +51,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       iconRight,
       customColor,
       fullWidth,
+      asChild,
       style,
       type = "button",
       children,
@@ -60,19 +69,29 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const isLink = variant === "link";
 
+    const classes = cn(
+      base,
+      sizes[size],
+      customColor ? "hover:brightness-95" : variants[variant],
+      isLink && "underline-offset-4 hover:underline",
+      fullWidth && "w-full",
+      className,
+    );
+
+    if (asChild) {
+      return (
+        <Slot ref={ref} style={customStyle} className={classes} {...props}>
+          {children}
+        </Slot>
+      );
+    }
+
     return (
       <button
         ref={ref}
         type={type}
         style={customStyle}
-        className={cn(
-          base,
-          sizes[size],
-          customColor ? "hover:brightness-95" : variants[variant],
-          isLink && "underline-offset-4 hover:underline",
-          fullWidth && "w-full",
-          className,
-        )}
+        className={classes}
         {...props}
       >
         {iconLeft ? <span className={cn("shrink-0", !isLink && "opacity-70")}>{iconLeft}</span> : null}

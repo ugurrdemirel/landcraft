@@ -1,4 +1,4 @@
-import { useId, useState, type HTMLAttributes, type ReactNode } from "react";
+import { useId, useState, type ElementType, type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "../utils/cn";
 import { getContrastText } from "../utils/contrast";
 import { ChevronDown, Menu, X } from "../icons";
@@ -50,6 +50,8 @@ export interface MegaMenuProps extends Omit<HTMLAttributes<HTMLElement>, "title"
   actions?: ReactNode;
   cta?: ReactNode;
   sticky?: boolean;
+  /** Component used to render brand, trigger and panel links. Defaults to `<a>`. Pass your router's `<Link>` (Next.js, Remix, React Router…) for framework-aware navigation. */
+  LinkComponent?: ElementType;
 }
 
 const triggerStyles = {
@@ -71,10 +73,12 @@ export const MegaMenu = ({
   actions,
   cta,
   sticky = true,
+  LinkComponent,
   onKeyDown,
   ...props
 }: MegaMenuProps) => {
   const ids = useId();
+  const Link = LinkComponent ?? "a";
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<number | null>(null);
@@ -166,7 +170,7 @@ export const MegaMenu = ({
           <ul className={cn(column.title && "mt-3", "space-y-0.5")}>
             {column.links.map((link) => (
               <li key={link.href}>
-                <a
+                <Link
                   href={link.href}
                   onClick={closeAll}
                   className={cn(
@@ -189,7 +193,7 @@ export const MegaMenu = ({
                       {link.description}
                     </span>
                   ) : null}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -206,7 +210,7 @@ export const MegaMenu = ({
       : undefined;
 
     return (
-      <a
+      <Link
         href={featured.href}
         onClick={closeAll}
         className={cn(
@@ -237,7 +241,7 @@ export const MegaMenu = ({
           aria-hidden
           className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full opacity-20 blur-2xl bg-black/40"
         />
-      </a>
+      </Link>
     );
   };
 
@@ -255,9 +259,9 @@ export const MegaMenu = ({
       {...props}
     >
       <nav className={bar} onMouseLeave={closePanels} aria-label="Mega menu">
-        <a href={brandHref} className="shrink-0">
+        <Link href={brandHref} className="shrink-0">
           {brandNode}
-        </a>
+        </Link>
 
         <ul className="hidden items-center gap-1 lg:flex">
           {items.map((item, i) => {
@@ -304,14 +308,14 @@ export const MegaMenu = ({
                     />
                   </button>
                 ) : (
-                  <a href={item.href ?? "#"} className={triggerClasses}>
+                  <Link href={item.href ?? "#"} className={triggerClasses}>
                     {item.label}
                     {item.badge ? (
                       <span className="rounded-full bg-primary-soft px-1.5 py-0.5 text-[10px] font-semibold tracking-wide text-primary">
                         {item.badge}
                       </span>
                     ) : null}
-                  </a>
+                  </Link>
                 )}
               </li>
             );
@@ -439,7 +443,7 @@ export const MegaMenu = ({
                 </li>
               ) : (
                 <li key={item.label} className="px-5">
-                  <a
+                  <Link
                     href={item.href ?? "#"}
                     onClick={() => setMobileOpen(false)}
                     className={cn(
@@ -450,7 +454,7 @@ export const MegaMenu = ({
                     )}
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ),
             )}

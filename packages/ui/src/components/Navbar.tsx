@@ -1,4 +1,4 @@
-import { useState, type HTMLAttributes, type ReactNode } from "react";
+import { useState, type ElementType, type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "../utils/cn";
 import { Menu, X } from "../icons";
 
@@ -21,8 +21,12 @@ export interface NavbarProps extends Omit<HTMLAttributes<HTMLElement>, "title"> 
   brandHref?: string;
   links: NavLink[];
   actions?: ReactNode;
-  sticky?: boolean;
   cta?: ReactNode;
+  /** Optional language switcher rendered on the right (desktop) and beside the menu button (mobile). */
+  languageSwitcher?: ReactNode;
+  sticky?: boolean;
+  /** Component used to render the brand and nav links. Defaults to `<a>`. Pass your router's `<Link>` (Next.js, Remix, React Router…) for framework-aware navigation. */
+  LinkComponent?: ElementType;
 }
 
 const linkStyles = {
@@ -43,11 +47,14 @@ export const Navbar = ({
   links,
   actions,
   cta,
+  languageSwitcher,
   sticky = true,
+  LinkComponent,
   ...props
 }: NavbarProps) => {
   const [open, setOpen] = useState(false);
   const inverse = variant === "inverse";
+  const Link = LinkComponent ?? "a";
 
   const shell = cn(
     "w-full transition-colors duration-200",
@@ -99,14 +106,14 @@ export const Navbar = ({
   return (
     <header className={cn(shell, variant === "floating" && "px-3 sm:px-6", className)} {...props}>
       <nav className={bar} aria-label="Main navigation">
-        <a href={brandHref} className="shrink-0">
+        <Link href={brandHref} className="shrink-0">
           {brandNode}
-        </a>
+        </Link>
 
         <ul className="hidden items-center gap-7 md:flex">
           {links.map((link) => (
             <li key={link.href}>
-              <a
+              <Link
                 href={link.href}
                 className={cn(
                   "text-sm font-medium transition-colors duration-150",
@@ -114,15 +121,20 @@ export const Navbar = ({
                 )}
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
 
         <div className="hidden items-center gap-3 md:flex">
+          {languageSwitcher}
           {actions}
           {cta}
         </div>
+
+        {languageSwitcher ? (
+          <div className="flex items-center md:hidden">{languageSwitcher}</div>
+        ) : null}
 
         <button
           type="button"
@@ -155,7 +167,7 @@ export const Navbar = ({
           <ul className={cn("flex flex-col py-4", variant !== "floating" && "px-5")}>
             {links.map((link) => (
               <li key={link.href}>
-                <a
+                <Link
                   href={link.href}
                   onClick={() => setOpen(false)}
                   className={cn(
@@ -166,7 +178,7 @@ export const Navbar = ({
                   )}
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
             {cta ? (

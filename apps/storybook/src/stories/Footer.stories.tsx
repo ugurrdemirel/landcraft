@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Footer, Newsletter } from "@ugurdemirel/landcraft";
 
 const meta = {
@@ -63,5 +63,36 @@ export const WithNewsletter: Story = {
     badge: (
       <Newsletter option="card" placeholder="you@company.com" note="Once a month. No spam." />
     ),
+  },
+};
+
+const SampleLogo = () => (
+  <span className="flex items-center gap-2.5">
+    <svg viewBox="0 0 32 32" className="h-7 w-7" aria-hidden>
+      <rect width="32" height="32" rx="8" fill="currentColor" />
+      <path
+        d="M10 22 22 10M13 10h6.5A2.5 2.5 0 0 1 22 12.5V19"
+        stroke="rgb(var(--color-on-primary))"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+    </svg>
+    <span className="font-display text-lg font-bold tracking-tight">Acurio</span>
+  </span>
+);
+
+/** Logo (node) — a brand visual/mark instead of a wordmark. */
+export const WithLogo: Story = {
+  name: "Logo swap (brand mark)",
+  args: { brand: undefined, logo: <SampleLogo /> },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "You can pass any node to the `logo` prop (SVG, <img>, component…). You can also supply a ready image via `logoSrc`/`logoAlt`; the wordmark is disabled then.",
+      },
+    },
   },
 };

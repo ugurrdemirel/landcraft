@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import type { Preview } from "@storybook/react";
+import type { Preview } from "@storybook/react-vite";
 // App-level utilities first, core styles LAST so the library's responsive
 // rules (md:flex, md:hidden, …) win the cascade.
 import "../src/index.css";

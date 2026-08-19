@@ -1,3 +1,4 @@
+"use client";
 import { forwardRef, useEffect, useId, useRef, type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "../utils/cn";
 import { X } from "../icons";

@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     dts({
       include: ["src"],
-      tsconfigPath: "./tsconfig.json",
+      tsconfigPath: "./tsconfig.build.json",
       rollupTypes: true,
     }),
   ],

@@ -31,11 +31,16 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build @ugurdemirel/landcraft
+        # The storybook typecheck resolves @ugurdemirel/landcraft to its
+        # dist/index.d.ts, so the package must be built first.
+        run: pnpm --filter @ugurdemirel/landcraft build
+
       - name: Run tests
         run: pnpm --filter @ugurdemirel/landcraft test
 
       - name: Typecheck
         run: pnpm typecheck
 
-      - name: Build @ugurdemirel/landcraft
-        run: pnpm --filter @ugurdemirel/landcraft build
+      - name: Verify the library build is up to date
+        run: test -d packages/ui/dist && test -f packages/ui/dist/index.d.ts

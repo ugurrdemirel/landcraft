@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Testimonials, type Testimonial } from "@ugurdemirel/landcraft";
+import { Testimonials, TestimonialCard, type Testimonial } from "@ugurdemirel/landcraft";
 
 const items: Testimonial[] = [
   {
@@ -43,6 +43,14 @@ const items: Testimonial[] = [
     company: "Forge",
     rating: 5,
   },
+  {
+    quote:
+      "We replaced a custom-built pricing page with the Pricing component in an afternoon — and it looks better.",
+    author: "Kaan Öztürk",
+    role: "Growth Lead",
+    company: "Havale",
+    accent: "#b45309",
+  },
 ];
 
 const meta = {
@@ -71,4 +79,39 @@ export const Option2_Carousel: Story = {
 export const Option3_Marquee: Story = {
   name: "Option 3 · Marquee",
   args: { option: "marquee" },
+};
+
+/** `accent` tints the initials avatar and the quote mark; `rating` shows a star row. */
+export const CardAnatomy: Story = {
+  name: "Card anatomy",
+  args: {},
+  parameters: { layout: "padded" },
+  render: () => (
+    <div className="mx-auto grid max-w-5xl gap-6 p-6 sm:grid-cols-2">
+      <div>
+        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">with accent + rating</p>
+        <TestimonialCard
+          testimonial={{
+            quote: "Switch palettes any time — text and surfaces re-sync, contrast never breaks.",
+            author: "Ayşe Yıldız",
+            role: "Founder",
+            company: "Lumina",
+            rating: 5,
+            accent: "#db2777",
+          }}
+        />
+      </div>
+      <div>
+        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">default initials</p>
+        <TestimonialCard
+          testimonial={{
+            quote: "A plain quote with the default primary avatar mark and no rating.",
+            author: "Mehmet Demir",
+            role: "CTO",
+            company: "Nova Labs",
+          }}
+        />
+      </div>
+    </div>
+  ),
 };

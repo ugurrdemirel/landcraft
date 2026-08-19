@@ -94,6 +94,43 @@ export const Option2_Centered: Story = {
   },
 };
 
+/** Centered with no product visual — pure copy, useful for launch announcements. */
+export const CenteredTextOnly: Story = {
+  name: "Centered · text only",
+  args: {
+    variant: "centered",
+    media: undefined,
+    meta: undefined,
+    title: <>One design language.<br /><span className="text-primary">Every landing page.</span></>,
+  },
+  parameters: {
+    layout: "fullscreen",
+    docs: {
+      description: {
+        story: "The centered option reads cleanly with no media — just eyebrow, headline, and a pair of actions.",
+      },
+    },
+  },
+};
+
+/** Split editorial layout without the meta row — tighter, type-led hero. */
+export const SplitTextOnly: Story = {
+  name: "Split · no media, no meta",
+  args: {
+    variant: "split",
+    media: undefined,
+    meta: undefined,
+  },
+  parameters: {
+    layout: "fullscreen",
+    docs: {
+      description: {
+        story: "Drop `media` and `meta` for a calm, type-led split hero with a single focus.",
+      },
+    },
+  },
+};
+
 /** Option 3 · Statement — full-width ink band. No eyebrow, just the message. */
 export const Option3_Statement: Story = {
   name: "Option 3 · Statement",

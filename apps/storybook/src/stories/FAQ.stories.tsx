@@ -55,3 +55,34 @@ export const Option3_Cards: Story = {
   name: "Option 3 · Cards",
   args: { option: "cards" },
 };
+
+/** `defaultOpen` pre-expands items; `allowMultiple` lets several stay open at once. */
+export const MultipleOpen: Story = {
+  name: "Accordion · multiple open",
+  args: {
+    option: "accordion",
+    allowMultiple: true,
+    defaultOpen: [0, 2],
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "With `allowMultiple`, more than one item can be expanded. `defaultOpen` controls which are open on first render.",
+      },
+    },
+  },
+};
+
+/** The split option with a short FAQ keeps the sticky heading tidy. */
+export const SplitCompact: Story = {
+  name: "Split · compact",
+  args: {
+    option: "split",
+    items: [
+      { question: "Does it work with Vite?", answer: "Yes — any Vite/React 18+ setup, plus Next.js with the 'use client' boundary." },
+      { question: "Is the source open?", answer: "Fully open source under MIT on GitHub." },
+      { question: "Can I contribute a palette?", answer: "Absolutely — palettes live in `src/styles` and are easy to add." },
+    ],
+  },
+};

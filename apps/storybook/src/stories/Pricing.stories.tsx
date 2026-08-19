@@ -82,3 +82,26 @@ export const CustomColorHighlight: Story = {
     />
   ),
 };
+
+/** The highlight card can be any brand color via `customColor` — text is computed automatically. */
+export const CustomColorPalette: Story = {
+  name: "customColor palette",
+  args: { option: "cards" },
+  parameters: { docs: { description: { story: "Paste a `customColor` on the highlighted plan to match any brand without touching CSS." } } },
+  render: (args) => (
+    <div className="space-y-10">
+      {["#065f46", "#7c3aed", "#b91c1c"].map((color) => (
+        <Pricing
+          key={color}
+          {...args}
+          option="compact"
+          plans={[
+            { name: "Starter", monthly: 9, yearly: 90, features: ["1 project", "Basic analytics"], cta: "Get started" },
+            { name: "Pro", monthly: 29, yearly: 290, highlighted: true, customColor: color, features: ["Unlimited projects", "Advanced analytics"], cta: "Go Pro" },
+            { name: "Enterprise", monthly: null, yearly: null, features: ["SLA", "Dedicated support"], cta: "Contact us" },
+          ]}
+        />
+      ))}
+    </div>
+  ),
+};

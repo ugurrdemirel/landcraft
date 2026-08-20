@@ -76,11 +76,23 @@ jobs:
 
           git push origin "$BRANCH"
 
-          gh pr create \
+          PR_URL=$(gh pr create \
             --base main \
             --head "$BRANCH" \
             --title "chore: release @ugurdemirel/landcraft@${VERSION}" \
-            --body "Auto-generated release PR. Merging this opens the version bump on \`main\` and publishes \`@ugurdemirel/landcraft@${VERSION}\` to npm."
+            --body "Auto-generated release PR. Merging this opens the version bump on \`main\` and publishes \`@ugurdemirel/landcraft@${VERSION}\` to npm.")
+
+          echo "Opened $PR_URL"
+          echo "pr_number=${PR_URL##*/}" >> "$GITHUB_OUTPUT"
+
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_PAT }}
+
+      - name: Enable auto-merge for release PR
+        if: steps.is-release.outputs.trigger == 'bump'
+        run: |
+          PR_NUMBER=${{ steps.release-pr.outputs.pr_number }}
+          gh pr merge --auto --merge "$PR_NUMBER"
         env:
           GH_TOKEN: ${{ secrets.RELEASE_PAT }}
 

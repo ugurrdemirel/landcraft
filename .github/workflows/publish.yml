@@ -76,11 +76,23 @@ jobs:
 
           git push origin "$BRANCH"
 
-          gh pr create \
+          PR_URL=$(gh pr create \
             --base main \
             --head "$BRANCH" \
             --title "chore: release @ugurdemirel/landcraft@${VERSION}" \
-            --body "Auto-generated release PR. Merging this opens the version bump on \`main\` and publishes \`@ugurdemirel/landcraft@${VERSION}\` to npm."
+            --body "Auto-generated release PR. Squash-merging this bumps the version on \`main\` and publishes \`@ugurdemirel/landcraft@${VERSION}\` to npm.")
+
+          echo "Opened $PR_URL"
+          echo "pr_number=${PR_URL##*/}" >> "$GITHUB_OUTPUT"
+
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_PAT }}
+
+      # Squash-merge keeps the "chore: release ..." commit subject on main,
+      # which the is-release detection relies on to trigger the publish step.
+      - name: Enable auto-merge for release PR
+        if: steps.is-release.outputs.trigger == 'bump'
+        run: gh pr merge --auto --squash "${{ steps.release-pr.outputs.pr_number }}"
         env:
           GH_TOKEN: ${{ secrets.RELEASE_PAT }}
 

@@ -20,20 +20,20 @@
       "require": "./dist/index.cjs"
     },
     "./styles.css": "./dist/styles.css",
-    "./theme.css": "./src/styles/theme.css"
+    "./theme.css": "./dist/theme.css"
   },
   "files": [
     "dist",
-    "src",
     "README.md"
   ],
   "sideEffects": [
     "*.css"
   ],
   "scripts": {
-    "build": "pnpm run build:js && pnpm run build:css",
+    "build": "pnpm run build:js && pnpm run build:css && pnpm run copy:theme",
     "build:js": "vite build",
     "build:css": "tailwindcss -i ./src/styles/index.css -o ./dist/styles.css",
+    "copy:theme": "cp ./src/styles/theme.css ./dist/theme.css",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",

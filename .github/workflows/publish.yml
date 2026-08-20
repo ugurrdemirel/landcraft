@@ -4,13 +4,15 @@ on:
   push:
     branches: [main]
 
-permissions:
-  contents: write
-  id-token: write
-
+# Don't let a release job and a publish job run at the same time.
 concurrency:
   group: "npm-publish"
   cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
 
 jobs:
   publish:
@@ -34,25 +36,56 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # If the commit that just landed on main is our own version bump
+      # (i.e. the release PR was merged), skip bumping and publish.
+      # Otherwise open a new release PR and stop.
+      - name: Check if this is our release commit
+        id: is-release
+        run: |
+          if git log -1 --format='%s' | grep -q "^chore: release @ugurdemirel/landcraft@"; then
+            echo "trigger=release" >> "$GITHUB_OUTPUT"
+          else
+            echo "trigger=bump" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Build @ugurdemirel/landcraft
         run: pnpm --filter @ugurdemirel/landcraft build
 
       - name: Typecheck
         run: pnpm typecheck
 
+      # ---- Path A: user PR or direct change merged -> open a release PR ----
       - name: Bump patch version
+        if: steps.is-release.outputs.trigger == 'bump'
         working-directory: packages/ui
         run: npm version patch --no-git-tag-version
 
-      - name: Commit version bump
+      - name: Create release pull request
+        if: steps.is-release.outputs.trigger == 'bump'
+        id: release-pr
         run: |
           VERSION=$(node -p "require('./packages/ui/package.json').version")
+          BRANCH="release/${VERSION}"
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git checkout -b "$BRANCH"
           git add packages/ui/package.json pnpm-lock.yaml
           git commit -m "chore: release @ugurdemirel/landcraft@${VERSION}"
-          git push
 
+          git push origin "$BRANCH"
+
+          gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "chore: release @ugurdemirel/landcraft@${VERSION}" \
+            --body "Auto-generated release PR. Merging this opens the version bump on \`main\` and publishes \`@ugurdemirel/landcraft@${VERSION}\` to npm."
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # ---- Path B: our version bump merged -> publish to npm ----
       - name: Publish to npm (trusted publishing)
+        if: steps.is-release.outputs.trigger == 'release'
         run: npm publish
         working-directory: packages/ui

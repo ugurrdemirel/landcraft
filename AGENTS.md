@@ -73,5 +73,35 @@ variants and states** of a component.
 - `packages/ui/src/index.ts` is the public entry; keep every public export there.
 - Tests are excluded from the published `.d.ts` via `tsconfig.build.json`
   (referenced by `vite-plugin-dts`). Do not emit test files into `dist`.
-- Components that call React hooks must carry the `"use client"` directive so the
-  library works in Next.js Server Components.
+
+### `"use client"` / React Server Components
+
+The library runs in Next.js and other SSR frameworks, so the server/client
+boundary is important:
+
+- **Any file that calls React hooks** (`useState`, `useEffect`, `useRef`,
+  `useId`, `useMemo`, `useReducer`, `useCallback`, …) **must start with the
+  `"use client"` directive** as the first line. Otherwise Next.js throws
+  `useState only works in Client Components`. This applies to the file that
+  directly calls the hook (e.g. a `parts.tsx` or `variants/*.tsx`), not just the
+  top-level dispatcher.
+- Server-safe components (no hooks) must **not** have the directive, so they stay
+  server components and keep the client bundle small. Only hook-using files get
+  pulled into the client graph.
+- Model it per module: a dispatcher can stay server-safe while rendering a
+  client-marked variant — Next.js handles that boundary if props are serializable.
+
+#### Build machinery (why it works)
+
+- The `dist` JS output uses **`preserveModules`** (see `vite.config.ts`) rather
+  than a single bundled file. This keeps each source file as its own
+  `dist/es/...js` / `dist/cjs/...cjs` module so every `"use client"` directive
+  survives and Next.js can read it from the imported module.
+- Rollup otherwise strips `"use client"` directives during bundling. The custom
+  `landcraft:preserve-client-directives` plugin in `vite.config.ts` re-emits the
+  directive at the top of each chunk whose facade module originally declared it.
+- `package.json` `exports` point `import` at `./dist/es/index.js` and `require`
+  at `./dist/cjs/index.cjs`; the public single import is unchanged.
+- Do **not** add a blanket `"use client"` to the entry/bundle — that would force
+  every component into the client bundle, which defeats the tree-shaking /
+  server-component size benefits.

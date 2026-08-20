@@ -3,6 +3,7 @@ name: Publish to npm
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 # Don't let a release job and a publish job run at the same time.
 concurrency:

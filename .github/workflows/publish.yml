@@ -82,7 +82,7 @@ jobs:
             --title "chore: release @ugurdemirel/landcraft@${VERSION}" \
             --body "Auto-generated release PR. Merging this opens the version bump on \`main\` and publishes \`@ugurdemirel/landcraft@${VERSION}\` to npm."
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.RELEASE_PAT }}
 
       # ---- Path B: our version bump merged -> publish to npm ----
       - name: Publish to npm (trusted publishing)

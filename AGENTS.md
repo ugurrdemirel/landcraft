@@ -2,6 +2,15 @@
 
 Guidance for AI coding agents working in this repository.
 
+## Workflow / branching
+
+- When making a change, work on a dedicated branch — but do not open a new branch
+  for every single change. Check the current branch name first; if the migration
+  you are about to make fits the branch's purpose, keep working on that same
+  branch. Never make these changes directly on branches like `main`.
+- Open PRs in English and write them for developers (other engineers who will
+  review the code), not for end users.
+
 ## Project overview
 
 Monorepo (`pnpm` workspaces) containing:

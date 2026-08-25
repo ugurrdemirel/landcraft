@@ -68,11 +68,20 @@ export const Slot = forwardRef<HTMLElement, SlotProps>((props, forwardedRef) => 
   }
 
   const child = Children.only(children) as ReactElement & { ref?: Ref<unknown> };
-  const composedRef = useComposedRefs(forwardedRef, child.ref);
+  const mergedProps = mergeProps(slotProps as AnyProps, child.props as AnyProps);
 
-  return cloneElement(child, {
-    ...mergeProps(slotProps as AnyProps, child.props as AnyProps),
-    ref: composedRef,
-  });
+  // Only attach a ref when one is actually being forwarded. When Slot renders
+  // in a Server Component (e.g. Button asChild wrapping next/link's Link) there
+  // is never a ref to forward — a ref created server-side and passed to a client
+  // child would cross the boundary and throw "Refs cannot be used in Server
+  // Components, nor passed to Client Components".
+  if (forwardedRef != null || child.ref != null) {
+    return cloneElement(child, {
+      ...mergedProps,
+      ref: useComposedRefs(forwardedRef, child.ref),
+    });
+  }
+
+  return cloneElement(child, mergedProps);
 });
 Slot.displayName = "Slot";

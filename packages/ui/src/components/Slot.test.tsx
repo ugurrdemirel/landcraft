@@ -1,4 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
+import { forwardRef } from "react";
 import { render, screen } from "@testing-library/react";
 import { Slot } from "./Slot";
 
@@ -41,5 +42,24 @@ describe("Slot", () => {
       </Slot>,
     );
     expect(screen.getByText("x")).toHaveClass("slot-class child-class");
+  });
+
+  it("does not attach a ref to the child when none is forwarded", () => {
+    const childRefs: Array<unknown> = [];
+    const Child = forwardRef<HTMLSpanElement>((_props, ref) => {
+      childRefs.push(ref);
+      return <span />;
+    });
+
+    render(
+      <Slot>
+        <Child />
+      </Slot>,
+    );
+
+    // A ref injected by Slot onto a client child (e.g. next/link) from a Server
+    // Component would throw "Refs cannot be used in Server Components". With no
+    // ref to forward, Slot must leave the child's ref untouched.
+    expect(childRefs).toEqual([null]);
   });
 });

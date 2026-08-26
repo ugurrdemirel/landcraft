@@ -37,6 +37,12 @@ export {
   type FeatureGridProps,
   type FeatureItem,
 } from "./components/Features";
+export {
+  FeatureShowcase,
+  type FeatureShowcaseProps,
+  type FeatureShowcaseItem,
+  type FeatureShowcaseMediaSide,
+} from "./components/FeatureShowcase";
 export { Stats, type StatsProps, type Stat } from "./components/Stats";
 export { Pricing, type PricingProps, type Plan } from "./components/Pricing";
 export {
@@ -48,6 +54,7 @@ export {
 } from "./components/Testimonials";
 export { CTA, type CTAProps } from "./components/CTA";
 export { FAQ, type FAQProps, type FaqItem } from "./components/FAQ";
+export { AccordionShowcase, type AccordionShowcaseProps, type AccordionShowcaseItem } from "./components/AccordionShowcase";
 export { Footer, type FooterProps, type FooterColumn, type FooterLink } from "./components/Footer";
 export {
   LanguageSwitcher,

@@ -1,6 +1,7 @@
 {
   "name": "@ugurdemirel/landcraft",
   "version": "0.1.9",
+  "license": "MIT",
   "publishConfig": {
     "access": "public"
   },

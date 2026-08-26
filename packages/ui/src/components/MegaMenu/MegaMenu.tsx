@@ -314,10 +314,6 @@ export const MegaMenu = ({
           {cta}
         </div>
 
-        {languageSwitcher ? (
-          <div className="flex items-center lg:hidden">{languageSwitcher}</div>
-        ) : null}
-
         <button
           type="button"
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
@@ -378,6 +374,9 @@ export const MegaMenu = ({
       >
         <div className="min-h-0 overflow-hidden">
           <ul className="flex flex-col py-4">
+            {languageSwitcher ? (
+              <li className="px-5 pb-4">{languageSwitcher}</li>
+            ) : null}
             {items.map((item, i) =>
               item.columns?.length || item.featured ? (
                 <li key={item.label} className="px-5">

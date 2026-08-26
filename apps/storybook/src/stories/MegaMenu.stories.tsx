@@ -192,7 +192,7 @@ export const WithLanguageSwitcher: Story = {
     docs: {
       description: {
         story:
-          "The `languageSwitcher` slot renders on desktop next to the actions and beside the hamburger on mobile — the opened panel matches the floating bar's width.",
+          "The `languageSwitcher` slot renders on desktop next to the actions; below desktop it moves inside the hamburger menu — the opened panel matches the floating bar's width.",
       },
     },
   },

@@ -2,10 +2,16 @@ import { describe, it, expect } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Navbar } from "./Navbar";
+import { LanguageSwitcher } from "../LanguageSwitcher/LanguageSwitcher";
 
 const links = [
   { label: "Product", href: "#product" },
   { label: "Pricing", href: "#pricing" },
+];
+
+const languages = [
+  { code: "tr", label: "Türkçe" },
+  { code: "en", label: "English" },
 ];
 
 describe("Navbar", () => {
@@ -82,6 +88,23 @@ describe("Navbar", () => {
       "aria-expanded",
       "false",
     );
+  });
+
+  it("renders the language switcher inside the mobile hamburger panel", () => {
+    const { container } = render(
+      <Navbar
+        brand="Acurio"
+        links={links}
+        languageSwitcher={<LanguageSwitcher languages={languages} defaultValue="en" />}
+      />,
+    );
+
+    // One trigger in the desktop action group, one inside the mobile panel.
+    const triggers = container.querySelectorAll('button[aria-haspopup="listbox"]');
+    expect(triggers.length).toBe(2);
+
+    const mobileList = container.querySelector("ul.flex-col")!;
+    expect(mobileList.querySelector('button[aria-haspopup="listbox"]')).toBeInTheDocument();
   });
 
   it("is not sticky when sticky is disabled", () => {

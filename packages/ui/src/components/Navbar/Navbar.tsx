@@ -129,10 +129,6 @@ export const Navbar = ({
           {cta}
         </div>
 
-        {languageSwitcher ? (
-          <div className="flex items-center md:hidden">{languageSwitcher}</div>
-        ) : null}
-
         <button
           type="button"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -157,6 +153,9 @@ export const Navbar = ({
       >
         <div className="min-h-0 overflow-hidden">
           <ul className={cn("flex flex-col py-4", variant !== "floating" && "px-5")}>
+            {languageSwitcher ? (
+              <li className="px-2 pb-4">{languageSwitcher}</li>
+            ) : null}
             {links.map((link) => (
               <li key={link.href}>
                 <Link

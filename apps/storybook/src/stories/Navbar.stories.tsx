@@ -95,6 +95,35 @@ export const NotSticky: Story = {
   args: { sticky: false, variant: "classic" },
 };
 
+/** Links marked `external: true` open in a new tab. */
+export const ExternalLinks: Story = {
+  name: "External links (new tab)",
+  args: {
+    variant: "classic",
+    links: [
+      { label: "Product", href: "#" },
+      { label: "Pricing", href: "#" },
+      { label: "Docs", href: "https://docs.example.com", external: true },
+      { label: "Changelog", href: "https://github.com/example/releases", external: true },
+    ],
+  },
+  decorators: [
+    (Story) => (
+      <div className="min-h-[18rem]">
+        <Story />
+      </div>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Mark a link with `external: true` to open it in a new tab (`target="_blank"` with `rel="noopener noreferrer"`). Applies to both the desktop bar and the mobile panel.',
+      },
+    },
+  },
+};
+
 const SampleLogo = () => (
   <span className="flex items-center gap-2.5">
     <svg viewBox="0 0 32 32" className="h-7 w-7" aria-hidden>

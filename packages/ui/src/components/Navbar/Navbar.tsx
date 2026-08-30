@@ -115,6 +115,8 @@ export const Navbar = ({
             <li key={link.href}>
               <Link
                 href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noopener noreferrer" : undefined}
                 className={cn("text-sm font-medium transition-colors duration-150", s.link)}
               >
                 {link.label}
@@ -160,6 +162,8 @@ export const Navbar = ({
               <li key={link.href}>
                 <Link
                   href={link.href}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noopener noreferrer" : undefined}
                   onClick={() => setOpen(false)}
                   className={cn(
                     "block rounded-md px-2 py-2.5 text-sm font-medium transition-colors duration-150",

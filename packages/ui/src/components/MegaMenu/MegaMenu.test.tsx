@@ -71,6 +71,58 @@ describe("MegaMenu", () => {
     expect(trigger).toHaveAttribute("aria-expanded", "false");
   });
 
+  it("opens column, featured and plain links marked external in a new tab", () => {
+    const { container } = render(
+      <MegaMenu
+        brand="Acurio"
+        items={[
+          {
+            label: "Product",
+            columns: [
+              {
+                title: "Build",
+                links: [
+                  { label: "API Platform", href: "https://api.example.com", external: true },
+                  { label: "Workflows", href: "#wf" },
+                ],
+              },
+            ],
+            featured: {
+              title: "Start",
+              href: "https://app.example.com",
+              external: true,
+            },
+          },
+          { label: "Docs", href: "https://docs.example.com", external: true },
+        ]}
+      />,
+    );
+
+    fireEvent.click(desktopTrigger(container));
+
+    // Column + featured links render in the desktop panel and the mobile panel.
+    container.querySelectorAll('a[href="https://api.example.com"]').forEach((link) => {
+      expect(link).toHaveAttribute("target", "_blank");
+      expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    });
+    container.querySelectorAll('a[href="https://app.example.com"]').forEach((link) => {
+      expect(link).toHaveAttribute("target", "_blank");
+      expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    });
+
+    // Plain top-level link (desktop bar + mobile panel).
+    screen.getAllByRole("link", { name: "Docs" }).forEach((link) => {
+      expect(link).toHaveAttribute("target", "_blank");
+      expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    });
+
+    // Non-external links keep in-tab navigation.
+    container.querySelectorAll('a[href="#wf"]').forEach((link) => {
+      expect(link).not.toHaveAttribute("target");
+      expect(link).not.toHaveAttribute("rel");
+    });
+  });
+
   it("applies the inverse variant to the header shell", () => {
     render(<MegaMenu brand="Acurio" items={items} variant="inverse" />);
     expect(screen.getByRole("banner")).toHaveClass("bg-[#101010]/85");

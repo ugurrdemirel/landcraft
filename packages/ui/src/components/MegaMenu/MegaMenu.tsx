@@ -163,6 +163,8 @@ export const MegaMenu = ({
                 <Link
                   href={link.href}
                   onClick={closeAll}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noopener noreferrer" : undefined}
                   className={cn(
                     "-mx-2 block rounded-md px-2 py-2 transition-colors duration-150",
                     s.columnLink,
@@ -201,6 +203,8 @@ export const MegaMenu = ({
       <Link
         href={featured.href}
         onClick={closeAll}
+        target={featured.external ? "_blank" : undefined}
+        rel={featured.external ? "noopener noreferrer" : undefined}
         className={cn(
           "group relative block overflow-hidden rounded-lg p-6 transition-transform duration-150 hover:-translate-y-0.5",
           mobile && "mt-8",
@@ -294,7 +298,7 @@ export const MegaMenu = ({
                     />
                   </button>
                 ) : (
-                  <Link href={item.href ?? "#"} className={triggerClasses}>
+                  <Link href={item.href ?? "#"} target={item.external ? "_blank" : undefined} rel={item.external ? "noopener noreferrer" : undefined} className={triggerClasses}>
                     {item.label}
                     {item.badge ? (
                       <span className={cn("rounded-full px-1.5 py-0.5 text-[10px] font-semibold tracking-wide", s.badge)}>
@@ -428,6 +432,8 @@ export const MegaMenu = ({
                 <li key={item.label} className="px-5">
                   <Link
                     href={item.href ?? "#"}
+                    target={item.external ? "_blank" : undefined}
+                    rel={item.external ? "noopener noreferrer" : undefined}
                     onClick={() => setMobileOpen(false)}
                     className={cn(
                       "block rounded-md px-2 py-2.5 text-sm font-medium transition-colors duration-150",

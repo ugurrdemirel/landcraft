@@ -6,13 +6,12 @@ import type { PricingVariantProps } from "../types";
 
 interface CardsProps extends PricingVariantProps {
   className?: string;
-  onBillingChange: (billing: "monthly" | "yearly") => void;
 }
 
-export const PricingCards = ({ className, plans, billing, onSelect, onBillingChange, ...props }: CardsProps) => {
+export const PricingCards = ({ className, plans, billing, onBillingChange, onSelect, yearlyBadge, ...props }: CardsProps) => {
   return (
     <div className={cn("w-full", className)} {...props}>
-      <BillingToggle billing={billing} onChange={onBillingChange} />
+      <BillingToggle billing={billing} onChange={onBillingChange} yearlyBadge={yearlyBadge} />
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
         {plans.map((plan) => {
           const isHighlighted = plan.highlighted && !plan.customColor;

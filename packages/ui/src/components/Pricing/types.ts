@@ -18,11 +18,14 @@ export interface PricingProps extends Omit<HTMLAttributes<HTMLDivElement>, "onSe
   plans: Plan[];
   option?: PricingOption;
   defaultBilling?: "monthly" | "yearly";
+  yearlyBadge?: string;
   onSelect?: (plan: Plan, billing: "monthly" | "yearly") => void;
 }
 
 export interface PricingVariantProps extends Omit<HTMLAttributes<HTMLDivElement>, "onSelect"> {
   plans: Plan[];
   billing: "monthly" | "yearly";
+  onBillingChange: (billing: "monthly" | "yearly") => void;
+  yearlyBadge?: string;
   onSelect?: (plan: Plan, billing: "monthly" | "yearly") => void;
 }

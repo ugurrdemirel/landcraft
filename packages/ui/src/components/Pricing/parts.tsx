@@ -32,15 +32,20 @@ export function BillingToggle({
   billing,
   onChange,
   dark,
+  yearlyBadge,
 }: {
   billing: "monthly" | "yearly";
   onChange: (b: "monthly" | "yearly") => void;
   dark?: boolean;
+  yearlyBadge?: string;
 }) {
   // The accent token is a background color, but its shipped "on-accent"
   // pairing isn't guaranteed to be contrast-safe (e.g. white on amber).
-  // Derive the badge text color from the actual accent value instead.
-  const accentText = useTokenForeground("--color-accent");
+  // Derive the badge text color from the actual accent value instead. When
+  // the token can't be read yet (SSR/prerender/jsdom/first paint), fall back
+  // to the contrast-correct color for the default emerald accent — white on
+  // emerald-600 only reaches ~3.8:1 and fails WCAG AA for small text.
+  const accentText = useTokenForeground("--color-accent", "#0f172a");
   return (
     <div className="mb-10 flex items-center justify-center gap-4">
       <span
@@ -77,12 +82,14 @@ export function BillingToggle({
         )}
       >
         Yearly
-        <span
-          className="rounded-full bg-accent px-2 py-0.5 text-xs font-semibold"
-          style={{ color: accentText }}
-        >
-          −2 ay
-        </span>
+        {yearlyBadge ? (
+          <span
+            className="rounded-full bg-accent px-2 py-0.5 text-xs font-semibold"
+            style={{ color: accentText }}
+          >
+            {yearlyBadge}
+          </span>
+        ) : null}
       </span>
     </div>
   );

@@ -1,6 +1,6 @@
 import { cn } from "../../../utils/cn";
 import { getContrastText } from "../../../utils/contrast";
-import { PriceValue, PlanButton } from "../parts";
+import { PriceValue, BillingToggle, PlanButton } from "../parts";
 import { Check } from "../../../icons";
 import type { PricingVariantProps } from "../types";
 
@@ -8,9 +8,10 @@ interface BentoProps extends PricingVariantProps {
   className?: string;
 }
 
-export const PricingBento = ({ className, plans, billing, onSelect, ...props }: BentoProps) => {
+export const PricingBento = ({ className, plans, billing, onBillingChange, onSelect, yearlyBadge, ...props }: BentoProps) => {
   return (
     <div className={cn("w-full", className)} {...props}>
+      <BillingToggle billing={billing} onChange={onBillingChange} yearlyBadge={yearlyBadge} />
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {plans.map((plan) => {
           const isHighlighted = plan.highlighted && !plan.customColor;

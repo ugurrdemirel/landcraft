@@ -1,5 +1,5 @@
 import { cn } from "../../../utils/cn";
-import { PlanButton } from "../parts";
+import { BillingToggle, PlanButton } from "../parts";
 import { Check } from "../../../icons";
 import type { PricingVariantProps } from "../types";
 
@@ -7,11 +7,12 @@ interface CompactProps extends PricingVariantProps {
   className?: string;
 }
 
-export const PricingCompact = ({ className, plans, billing, onSelect, ...props }: CompactProps) => {
+export const PricingCompact = ({ className, plans, billing, onBillingChange, onSelect, yearlyBadge, ...props }: CompactProps) => {
   const price = (v: number | null) => (v === null ? "Custom" : `$${v}`);
 
   return (
     <div className={cn("w-full", className)} {...props}>
+      <BillingToggle billing={billing} onChange={onBillingChange} yearlyBadge={yearlyBadge} />
       <div className="divide-y divide-border overflow-hidden rounded-xl border border-border bg-surface">
         {plans.map((plan) => {
           const value = billing === "monthly" ? plan.monthly : plan.yearly;

@@ -8,6 +8,7 @@ const meta = {
   argTypes: {
     option: { control: "radio", options: ["cards", "bento", "compact"] },
     defaultBilling: { control: "radio", options: ["monthly", "yearly"] },
+    yearlyBadge: { control: "text", description: "Badge text next to Yearly in the billing toggle" },
   },
   args: {
     option: "cards",
@@ -64,6 +65,13 @@ export const Option2_Bento: Story = {
 export const Option3_Compact: Story = {
   name: "Option 3 · Compact rows",
   args: { option: "compact" },
+};
+
+export const YearlyBadge: Story = {
+  name: "Custom yearly badge",
+  render: (args) => (
+    <Pricing {...args} option="bento" yearlyBadge="2 months free" />
+  ),
 };
 
 export const CustomColorHighlight: Story = {

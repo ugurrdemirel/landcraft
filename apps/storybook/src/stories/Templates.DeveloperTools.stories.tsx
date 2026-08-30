@@ -228,8 +228,8 @@ export const ApiReference: StoryObj = {
       <Section size="sm" eyebrowStyle="caps" eyebrow="API reference" title="Most-used functions">
         <div className="space-y-3">
           {[
-            { sig: "getContrastText(bg: string): string", desc: "Picks the most readable text color for a background using WCAG luminance." },
-            { sig: "useTokenForeground('--color-primary')", desc: "Reads the live token and returns a theme-appropriate foreground color." },
+            { sig: "color: contrast-color(bg)", desc: "CSS picks the most readable text color for a surface automatically." },
+            { sig: "contrast-color(rgb(var(--color-primary)))", desc: "Binds contrast to a live --color-* token — re-themes instantly." },
             { sig: "<Navbar variant='floating' … />", desc: "Three navbar options: floating, blurred, and fully token-based." },
             { sig: "import('@ugurdemirel/landcraft/theme.css')", desc: "A tone, font, and radius theme (Tailwind v4 CSS) for your own project." },
           ].map((item) => (

@@ -1,7 +1,6 @@
 "use client";
 import { useId, useState } from "react";
 import { cn } from "../../utils/cn";
-import { getContrastText } from "../../utils/contrast";
 import { ChevronDown, Menu, X } from "../../icons";
 import type { MegaMenuProps, MegaMenuVariant, MegaMenuItem } from "./types";
 
@@ -196,7 +195,7 @@ export const MegaMenu = ({
     const featured = item.featured;
     if (!featured) return null;
     const featuredStyle = featured.accent
-      ? { backgroundColor: featured.accent, color: getContrastText(featured.accent) }
+      ? { backgroundColor: featured.accent, color: `contrast-color(${featured.accent})` }
       : undefined;
 
     return (

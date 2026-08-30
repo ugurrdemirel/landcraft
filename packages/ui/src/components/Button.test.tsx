@@ -64,9 +64,12 @@ describe("Button", () => {
   it("sets a computed text color and background for customColor", () => {
     render(<Button customColor="#111111">Custom</Button>);
     const btn = screen.getByRole("button", { name: "Custom" });
-    expect(btn).toHaveStyle({ backgroundColor: "#111111" });
-    // Text is the light candidate for a very dark background.
-    expect(btn).toHaveStyle({ color: "#ffffff" });
+    // Background is bound to a custom property; text color is delegated to
+    // CSS contrast-color() against that same property.
+    expect(btn).toHaveAttribute(
+      "style",
+      "--lc-bg: #111111; background-color: var(--lc-bg); color: contrast-color(var(--lc-bg));",
+    );
   });
 
   it("forwards an onClick handler and fires it", async () => {

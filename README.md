@@ -44,8 +44,7 @@ pnpm typecheck               # typechecks all packages
 2. **Paired tokens.** Every surface color ships with a matching `--color-on-*` text
    color, so readability is preserved as themes change together.
 3. **Dynamic surfaces.** `customColor` props, gradient Hero/CTA and highlighted pricing
-   cards read the painted background at runtime and pick the most readable text color
-   via the **WCAG relative-luminance** formula (`getContrastText` / `useTokenForeground`).
+   cards use the CSS `contrast-color()` function to pick the most readable text color.
    Switch to a dark palette and gradient text flips automatically.
 
 ## Using the library in your own project

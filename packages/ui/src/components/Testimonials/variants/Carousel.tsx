@@ -1,7 +1,6 @@
 "use client";
 import { forwardRef, useState, type HTMLAttributes } from "react";
 import { cn } from "../../../utils/cn";
-import { getContrastText } from "../../../utils/contrast";
 import { ChevronLeft, ChevronRight, Quote } from "../../../icons";
 import { initials } from "../parts";
 import type { Testimonial } from "../types";
@@ -15,7 +14,7 @@ export const TestimonialsCarousel = forwardRef<HTMLDivElement, CarouselProps>(
     const [index, setIndex] = useState(0);
     const item = items[index % items.length];
     const badgeStyle = item.accent
-      ? { backgroundColor: item.accent, color: getContrastText(item.accent, "#111111", "#ffffff") }
+      ? { backgroundColor: item.accent, color: `contrast-color(${item.accent})` }
       : undefined;
 
     const go = (dir: 1 | -1) => setIndex((i) => (i + dir + items.length) % items.length);

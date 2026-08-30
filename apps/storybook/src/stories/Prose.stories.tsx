@@ -42,9 +42,8 @@ export const BlogArticle: Story = {
           team that tunes contrast by hand eventually ships an unreadable button.
         </blockquote>
         <p>
-          To make this work, the <code>getContrastText</code> function reads the
-          background's brightness with the WCAG formula and returns the most readable
-          foreground color.
+          To make this work, the <code>contrast-color()</code> CSS function compares
+          candidate foregrounds against the surface and returns the most readable one.
         </p>
         <h2>Why only one language?</h2>
         <p>

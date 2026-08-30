@@ -367,6 +367,53 @@ export const IconFeaturePanel: Story = {
   ],
 };
 
+/** Links marked `external: true` open in a new tab. */
+export const ExternalLinks: Story = {
+  name: "External links (new tab)",
+  args: {
+    variant: "classic",
+    items: [
+      {
+        label: "Developers",
+        columns: [
+          {
+            title: "Docs",
+            links: [
+              { label: "API reference", href: "https://docs.example.com/api", external: true },
+              { label: "Changelog", href: "https://github.com/example/releases", external: true },
+              { label: "Status", href: "#" },
+            ],
+          },
+        ],
+        featured: {
+          title: "Read the platform overview",
+          description: "Architecture, security and uptime details.",
+          cta: "Open docs",
+          href: "https://docs.example.com/overview",
+          external: true,
+        },
+      },
+      { label: "Pricing", href: "#" },
+      { label: "GitHub", href: "https://github.com/example", external: true },
+    ],
+  },
+  decorators: [
+    (Story) => (
+      <div className="min-h-[24rem]">
+        <Story />
+      </div>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Mark a column link, the featured card or a plain top-level link with `external: true` to open it in a new tab (`target="_blank"` with `rel="noopener noreferrer"`).',
+      },
+    },
+  },
+};
+
 /**
  * Logo swap — a brand mark instead of a wordmark, plus a non-sticky bar.
  */

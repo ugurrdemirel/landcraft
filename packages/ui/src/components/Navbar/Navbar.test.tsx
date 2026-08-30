@@ -33,6 +33,33 @@ describe("Navbar", () => {
     expect(nav.querySelector('a[href="/"]')).toBeInTheDocument();
   });
 
+  it("opens links marked external in a new tab and keeps others in the same tab", () => {
+    render(
+      <Navbar
+        brand="Acurio"
+        links={[
+          { label: "Docs", href: "https://docs.example.com", external: true },
+          { label: "Pricing", href: "#pricing" },
+        ]}
+      />,
+    );
+    const nav = screen.getByRole("navigation", { name: "Main navigation" });
+
+    // Both the desktop list and the mobile panel render the external link.
+    const docsLinks = within(nav).getAllByRole("link", { name: "Docs" });
+    expect(docsLinks.length).toBeGreaterThan(0);
+    docsLinks.forEach((link) => {
+      expect(link).toHaveAttribute("target", "_blank");
+      expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    });
+
+    const pricingLinks = within(nav).getAllByRole("link", { name: "Pricing" });
+    pricingLinks.forEach((link) => {
+      expect(link).not.toHaveAttribute("target");
+      expect(link).not.toHaveAttribute("rel");
+    });
+  });
+
   it("applies the classic variant shell", () => {
     render(<Navbar brand="Acurio" links={links} variant="classic" />);
     expect(screen.getByRole("banner")).toHaveClass("bg-background/85");

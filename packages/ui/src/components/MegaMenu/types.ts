@@ -4,6 +4,8 @@ export interface MegaMenuLink {
   label: string;
   href: string;
   description?: string;
+  /** When true, the link opens in a new tab (`target="_blank"` with `rel="noopener noreferrer"`). */
+  external?: boolean;
 }
 
 export interface MegaMenuColumn {
@@ -18,6 +20,8 @@ export interface MegaMenuFeatured {
   cta?: string;
   /** Background color for the card; glyph text color is computed for contrast. */
   accent?: string;
+  /** When true, the card opens in a new tab (`target="_blank"` with `rel="noopener noreferrer"`). */
+  external?: boolean;
 }
 
 export interface MegaMenuItem {
@@ -29,6 +33,8 @@ export interface MegaMenuItem {
   featured?: MegaMenuFeatured;
   /** Small pill rendered next to the trigger label. */
   badge?: string;
+  /** When true, a plain link item opens in a new tab (`target="_blank"` with `rel="noopener noreferrer"`). */
+  external?: boolean;
 }
 
 export type MegaMenuVariant = "classic" | "floating" | "inverse";

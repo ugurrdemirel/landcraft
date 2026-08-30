@@ -3,6 +3,8 @@ import type { ElementType, HTMLAttributes, ReactNode } from "react";
 export interface NavLink {
   label: string;
   href: string;
+  /** When true, the link opens in a new tab (`target="_blank"` with `rel="noopener noreferrer"`). */
+  external?: boolean;
 }
 
 export type NavbarVariant = "classic" | "floating" | "inverse";

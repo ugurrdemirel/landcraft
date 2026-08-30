@@ -157,9 +157,8 @@ dark-mode variants.
 1. **Paired tokens.** Every surface color ships with a matching `--color-on-*` value;
    themes change together.
 2. **Dynamic surfaces.** Gradient CTA panels, statement heroes and `customColor` use
-   the WCAG relative-luminance formula at runtime (`getContrastText` /
-   `useTokenForeground`). When a dark palette lightens the primary, text flips dark
-   automatically.
+   the CSS `contrast-color()` function to pick the most readable text color. When a
+   dark palette lightens the primary, text flips dark automatically.
 
 ### Icons
 

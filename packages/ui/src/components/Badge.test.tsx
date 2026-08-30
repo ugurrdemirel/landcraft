@@ -44,8 +44,12 @@ describe("Badge", () => {
   it("sets a computed text color for customColor", () => {
     render(<Badge customColor="#111111">Dark</Badge>);
     const badge = screen.getByText("Dark");
-    expect(badge).toHaveStyle({ backgroundColor: "#111111" });
-    expect(badge).toHaveStyle({ color: "#ffffff" });
+    // Background is bound to a custom property; text color is delegated to
+    // CSS contrast-color() against that same property.
+    expect(badge).toHaveAttribute(
+      "style",
+      "--lc-bg: #111111; background-color: var(--lc-bg); color: contrast-color(var(--lc-bg));",
+    );
   });
 
   it("forwards arbitrary props like aria-label", () => {

@@ -1,6 +1,5 @@
-import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
+import { forwardRef, type CSSProperties, type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "../utils/cn";
-import { getContrastText } from "../utils/contrast";
 
 export type BadgeVariant = "solid" | "soft" | "outline" | "dot";
 export type BadgeSize = "sm" | "md";
@@ -34,7 +33,12 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
     ref,
   ) => {
     const customStyle = customColor
-      ? { ...style, backgroundColor: customColor, color: getContrastText(customColor, "#111111", "#ffffff") }
+      ? ({
+          ...style,
+          "--lc-bg": customColor,
+          backgroundColor: "var(--lc-bg)",
+          color: "contrast-color(var(--lc-bg))",
+        } as CSSProperties)
       : style;
 
     return (

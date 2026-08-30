@@ -89,11 +89,11 @@ export const ArticlePage: StoryObj = {
             <p>
               Some surfaces don't come from a token — a <code>customColor</code> prop,
               a gradient CTA panel, a highlighted pricing card. For these cases the
-              library reads the background's <em>brightness</em> and picks the most readable
-              foreground color with the WCAG formula:
+              CSS <code>contrast-color()</code> function picks the most readable
+              foreground color from the painted surface:
             </p>
-            <pre><code>{`getContrastText("#eab308");
-// → dark: #111111 (high-luminance surface)*`}</code></pre>
+            <pre><code>{`color: contrast-color(#eab308);
+// → black (high-luminance surface)*`}</code></pre>
             <p>
               So whether the theme is light or dark, you never have to adjust text by hand.
               Setting up a new project is as simple as importing a <a href="#">styles.css</a> and writing

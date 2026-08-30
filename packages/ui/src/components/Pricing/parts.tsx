@@ -1,7 +1,4 @@
-"use client";
 import { cn } from "../../utils/cn";
-import { getContrastText } from "../../utils/contrast";
-import { useTokenForeground } from "../../utils/useTokenForeground";
 import { ArrowRight } from "../../icons";
 import type { Plan } from "./types";
 
@@ -41,11 +38,8 @@ export function BillingToggle({
 }) {
   // The accent token is a background color, but its shipped "on-accent"
   // pairing isn't guaranteed to be contrast-safe (e.g. white on amber).
-  // Derive the badge text color from the actual accent value instead. When
-  // the token can't be read yet (SSR/prerender/jsdom/first paint), fall back
-  // to the contrast-correct color for the default emerald accent — white on
-  // emerald-600 only reaches ~3.8:1 and fails WCAG AA for small text.
-  const accentText = useTokenForeground("--color-accent", "#0f172a");
+  // Let CSS pick the readable text color from the actual accent value via
+  // contrast-color(); it re-evaluates automatically when the token changes.
   return (
     <div className="mb-10 flex items-center justify-center gap-4">
       <span
@@ -85,7 +79,7 @@ export function BillingToggle({
         {yearlyBadge ? (
           <span
             className="rounded-full bg-accent px-2 py-0.5 text-xs font-semibold"
-            style={{ color: accentText }}
+            style={{ color: "contrast-color(rgb(var(--color-accent)))" }}
           >
             {yearlyBadge}
           </span>
@@ -107,7 +101,6 @@ export function PlanButton({
   dark?: boolean;
 }) {
   const isHighlighted = plan.highlighted && !plan.customColor;
-  const fg = plan.customColor ? getContrastText(plan.customColor, "#111111", "#ffffff") : undefined;
   return (
     <button
       type="button"
@@ -123,7 +116,10 @@ export function PlanButton({
       )}
       style={
         plan.customColor
-          ? { backgroundColor: plan.customColor, color: fg }
+          ? {
+              backgroundColor: plan.customColor,
+              color: `contrast-color(${plan.customColor})`,
+            }
           : isHighlighted
             ? {
                 backgroundColor: "rgb(var(--color-primary))",

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, afterEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Pricing } from "./Pricing";
 
@@ -109,38 +109,10 @@ describe("Pricing", () => {
 });
 
 describe("Pricing billing badge contrast", () => {
-  class FakeMutationObserver {
-    observe() {}
-    disconnect() {}
-  }
-
-  function stubComputedStyle(resolver: (name: string) => string) {
-    vi.stubGlobal("MutationObserver", FakeMutationObserver as unknown as typeof MutationObserver);
-    vi.spyOn(window, "getComputedStyle").mockReturnValue({
-      getPropertyValue: (name: string) => resolver(name),
-    } as CSSStyleDeclaration);
-  }
-
-  afterEach(() => {
-    vi.restoreAllMocks();
-    vi.unstubAllGlobals();
-  });
-
-  it("derives a dark badge text color for a light accent token", () => {
-    stubComputedStyle((name) => (name === "--color-accent" ? "255 255 255" : ""));
+  it("binds the badge text color to contrast-color() against the accent token", () => {
     render(<Pricing plans={plans} yearlyBadge="2 months free" />);
-    expect(screen.getByText("2 months free")).toHaveAttribute("style", "color: rgb(15, 23, 42);");
-  });
-
-  it("derives a light badge text color for a dark accent token", () => {
-    stubComputedStyle((name) => (name === "--color-accent" ? "5 5 5" : ""));
-    render(<Pricing plans={plans} yearlyBadge="2 months free" />);
-    expect(screen.getByText("2 months free")).toHaveAttribute("style", "color: rgb(255, 255, 255);");
-  });
-
-  it("falls back to a readable contrast-based color (not white) when the accent token is unreadable", () => {
-    stubComputedStyle(() => "");
-    render(<Pricing plans={plans} yearlyBadge="2 months free" />);
-    expect(screen.getByText("2 months free")).toHaveAttribute("style", "color: rgb(15, 23, 42);");
+    expect(screen.getByText("2 months free")).toHaveStyle(
+      "color: contrast-color(rgb(var(--color-accent)));",
+    );
   });
 });

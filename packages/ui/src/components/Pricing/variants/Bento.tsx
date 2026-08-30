@@ -1,5 +1,4 @@
 import { cn } from "../../../utils/cn";
-import { getContrastText } from "../../../utils/contrast";
 import { PriceValue, BillingToggle, PlanButton } from "../parts";
 import { Check } from "../../../icons";
 import type { PricingVariantProps } from "../types";
@@ -17,7 +16,7 @@ export const PricingBento = ({ className, plans, billing, onBillingChange, onSel
           const isHighlighted = plan.highlighted && !plan.customColor;
           const bg = plan.customColor || (isHighlighted ? "rgb(var(--color-primary))" : undefined);
           const fg = plan.customColor
-            ? getContrastText(plan.customColor, "#111111", "#ffffff")
+            ? `contrast-color(${plan.customColor})`
             : isHighlighted
               ? "rgb(var(--color-on-primary))"
               : undefined;

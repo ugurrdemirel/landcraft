@@ -1,6 +1,5 @@
 import { forwardRef, type ButtonHTMLAttributes, type CSSProperties, type ReactNode } from "react";
 import { cn } from "../utils/cn";
-import { getContrastText } from "../utils/contrast";
 import { Slot } from "./Slot";
 
 export type ButtonVariant = "primary" | "dark" | "outline" | "ghost" | "link";
@@ -60,11 +59,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) => {
     const customStyle: CSSProperties | undefined = customColor
-      ? {
+      ? ({
           ...style,
-          backgroundColor: customColor,
-          color: getContrastText(customColor),
-        }
+          "--lc-bg": customColor,
+          backgroundColor: "var(--lc-bg)",
+          color: "contrast-color(var(--lc-bg))",
+        } as CSSProperties)
       : style;
 
     const isLink = variant === "link";

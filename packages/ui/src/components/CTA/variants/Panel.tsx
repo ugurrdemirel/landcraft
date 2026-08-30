@@ -1,16 +1,12 @@
-"use client";
 import { forwardRef } from "react";
 import { cn } from "../../../utils/cn";
 import { Container } from "../../Container";
-import { useTokenForeground } from "../../../utils/useTokenForeground";
 import { CTAActions } from "../parts";
 import type { CTAProps } from "../types";
 
 /** panel — brand gradient panel, rounded corners. */
 export const CTAPanel = forwardRef<HTMLElement, CTAProps>(
   ({ className, title, description, action, secondaryAction, align = "left", id, ...props }, ref) => {
-    const fg = useTokenForeground("--color-primary");
-
     return (
       <section ref={ref} id={id} className={cn("w-full py-6 pb-20", className)} {...props}>
         <Container>
@@ -19,7 +15,7 @@ export const CTAPanel = forwardRef<HTMLElement, CTAProps>(
             style={{
               background:
                 "radial-gradient(120% 160% at 0% 0%, rgb(var(--color-primary)), rgb(var(--color-primary-hover)) 55%, rgb(var(--color-primary) / 0.85))",
-              color: fg,
+              color: "contrast-color(rgb(var(--color-primary)))",
             }}
           >
             <div aria-hidden className="pointer-events-none absolute inset-0 grain opacity-[0.07] mix-blend-overlay" />

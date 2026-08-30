@@ -1,12 +1,11 @@
 import { forwardRef } from "react";
 import { cn } from "../../utils/cn";
-import { getContrastText } from "../../utils/contrast";
 import type { FeatureCardProps } from "./types";
 
 export const FeatureCard = forwardRef<HTMLDivElement, FeatureCardProps>(
   ({ className, icon, title, description, accent, large = false, ...props }, ref) => {
     const chipStyle = accent
-      ? { backgroundColor: accent, color: getContrastText(accent, "#111111", "#ffffff") }
+      ? { backgroundColor: accent, color: `contrast-color(${accent})` }
       : undefined;
 
     return (

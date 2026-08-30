@@ -1,6 +1,5 @@
 import { forwardRef } from "react";
 import { cn } from "../../utils/cn";
-import { getContrastText } from "../../utils/contrast";
 import { Quote, Star } from "../../icons";
 import { initials } from "./parts";
 import type { TestimonialCardProps } from "./types";
@@ -9,7 +8,7 @@ export const TestimonialCard = forwardRef<HTMLElement, TestimonialCardProps>(
   function TestimonialCard({ className, testimonial, ...props }, ref) {
     const { quote, author, role, company, avatar, accent, rating } = testimonial;
     const badgeStyle = accent
-      ? { backgroundColor: accent, color: getContrastText(accent, "#111111", "#ffffff") }
+      ? { backgroundColor: accent, color: `contrast-color(${accent})` }
       : undefined;
 
     return (

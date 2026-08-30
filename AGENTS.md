@@ -74,6 +74,28 @@ variants and states** of a component.
 - Tests are excluded from the published `.d.ts` via `tsconfig.build.json`
   (referenced by `vite-plugin-dts`). Do not emit test files into `dist`.
 
+### Dynamic contrast via CSS `contrast-color()`
+
+Text color for dynamic surfaces is chosen by the browser, never by JS:
+
+- Use the native CSS `contrast-color(<color>)` function on any element whose
+  background is dynamic (`customColor`, an `accent`, or a token that consumers
+  can re-theme). It returns `white` or `black` (whichever contrasts better) and
+  re-evaluates automatically when the source color changes at runtime.
+- Do **not** reintroduce JS contrast helpers (hand-rolled WCAG luminance/ratio
+  pickers). The old `getContrastText` / `useTokenForeground` utilities were
+  removed; compute contrast in CSS only.
+- Bind custom colors through a custom property so background and text share one
+  source and stay in sync, e.g.:
+  `--lc-bg: <color>; background-color: var(--lc-bg); color: contrast-color(var(--lc-bg));`
+- Token-based surfaces bind directly to the token:
+  `color: contrast-color(rgb(var(--color-accent)))`.
+- The old draft name `color-contrast()` and its `vs <candidates>` list are
+  **not** supported by browsers — always write `contrast-color()`.
+- In tests, assert the binding string. jsdom's CSSOM drops `contrast-color()`
+  values that contain a bare hex color (e.g. `contrast-color(#111111)`), so the
+  `var(--…)` / `rgb(var(--…))` forms are the assertable ones.
+
 ### `"use client"` / React Server Components
 
 The library runs in Next.js and other SSR frameworks, so the server/client

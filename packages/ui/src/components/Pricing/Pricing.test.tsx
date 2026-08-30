@@ -55,6 +55,29 @@ describe("Pricing", () => {
     expect(screen.getByText("$90")).toBeInTheDocument();
   });
 
+  it("keeps the bento price on the same row as the plan name even with a long description", () => {
+    render(
+      <Pricing
+        option="bento"
+        plans={[
+          {
+            name: "Starter",
+            description: "A long description that should never push the price onto its own line ".repeat(3),
+            monthly: 9,
+            yearly: 90,
+            features: [],
+          },
+        ]}
+      />,
+    );
+    const price = screen.getByText("$9");
+    const row = price.parentElement?.parentElement;
+    expect(row).toBeInTheDocument();
+    expect(row).not.toHaveClass("flex-wrap");
+    expect(row?.firstElementChild).toHaveClass("min-w-0");
+    expect(price.parentElement).toHaveClass("shrink-0");
+  });
+
   it("renders a custom yearly badge via the yearlyBadge prop", () => {
     render(<Pricing plans={plans} yearlyBadge="2 months free" />);
     expect(screen.getByText("2 months free")).toBeInTheDocument();

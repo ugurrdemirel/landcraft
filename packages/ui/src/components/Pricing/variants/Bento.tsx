@@ -32,8 +32,8 @@ export const PricingBento = ({ className, plans, billing, onBillingChange, onSel
               )}
               style={bg ? { backgroundColor: bg, color: fg } : undefined}
             >
-              <div className="flex flex-wrap items-start justify-between gap-4">
-                <div>
+              <div className="flex items-start justify-between gap-4">
+                <div className="min-w-0">
                   <h3 className={cn("font-display text-xl font-semibold tracking-tight", bg ? "text-current" : "text-foreground")}>
                     {plan.name}
                   </h3>
@@ -43,7 +43,7 @@ export const PricingBento = ({ className, plans, billing, onBillingChange, onSel
                     </p>
                   ) : null}
                 </div>
-                <div className={cn("font-display", bg ? "text-current" : "text-foreground")}>
+                <div className={cn("shrink-0 font-display", bg ? "text-current" : "text-foreground")}>
                   <PriceValue value={billing === "monthly" ? plan.monthly : plan.yearly} billing={billing} dim={!bg} />
                 </div>
               </div>

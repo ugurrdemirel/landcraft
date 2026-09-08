@@ -199,6 +199,17 @@
   }
 }
 
+/* Gentle vertical "breathing" drift for floating hero logo tiles. */
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
 /* ── Popover-based Modal (dialog) ────────────────────────── */
 
 .modal-anim {

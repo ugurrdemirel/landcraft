@@ -59,6 +59,33 @@ describe("Hero", () => {
     expect(container.querySelector(".grain")).toBeInTheDocument();
   });
 
+  it("renders the parallax variant with centered copy on a plain background", () => {
+    const { container } = render(<Hero {...base} variant="parallax" />);
+    const h1 = screen.getByRole("heading", { name: "Build something great" });
+    expect(h1).toBeInTheDocument();
+    const section = container.querySelector("section");
+    expect(section).toHaveClass("bg-background");
+    // No grid/pattern backdrop is rendered.
+    expect(container.querySelector("[style*='background-image']")).not.toBeInTheDocument();
+  });
+
+  it("renders decorative floating logo tiles in the parallax variant", () => {
+    const logos = [
+      { label: "Claude", icon: <span>✦</span>, x: 20, y: 30 },
+      { label: "Cursor", icon: <span>▮</span>, x: 80, y: 70 },
+    ];
+    const { container } = render(<Hero {...base} variant="parallax" logos={logos} />);
+    const tiles = container.querySelectorAll("[data-logo]");
+    expect(tiles).toHaveLength(2);
+    expect(tiles[0]).toHaveAttribute("data-logo", "Claude");
+    expect(tiles[1]).toHaveAttribute("data-logo", "Cursor");
+    // Tiles are decorative — hidden from the accessibility tree.
+    expect(tiles[0]).toHaveAttribute("aria-hidden", "true");
+    // Each tile box carries the breathing float animation with a per-tile delay.
+    const box = tiles[0].querySelector(".rounded-2xl");
+    expect(box).toHaveAttribute("style", expect.stringContaining("hero-float"));
+  });
+
   it("omits the meta row when no meta is supplied", () => {
     render(<Hero {...base} />);
     expect(screen.queryByRole("list")).not.toBeInTheDocument();

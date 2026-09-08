@@ -7,6 +7,12 @@ import {
   Star,
   Users,
   Rocket,
+  Terminal,
+  Box,
+  Cpu,
+  Zap,
+  Globe,
+  Code,
 } from "@ugurdemirel/landcraft";
 
 const meta = {
@@ -14,7 +20,7 @@ const meta = {
   component: Hero,
   tags: ["autodocs"],
   argTypes: {
-    variant: { control: "radio", options: ["split", "centered", "statement"] },
+    variant: { control: "radio", options: ["split", "centered", "statement", "parallax"] },
   },
   args: {
     variant: "split",
@@ -126,6 +132,40 @@ export const SplitTextOnly: Story = {
     docs: {
       description: {
         story: "Drop `media` and `meta` for a calm, type-led split hero with a single focus.",
+      },
+    },
+  },
+};
+
+/** Option 4 · Parallax — centred copy with floating logo tiles that follow the mouse. */
+export const Option4_Parallax: Story = {
+  name: "Option 4 · Parallax",
+  args: {
+    variant: "parallax",
+    media: undefined,
+    title: <>One surface.<br />Every tool.</>,
+    description:
+      "Bring your whole stack together from a single control point. The floating tiles drift with the mouse and breathe gently on their own.",
+    primaryAction: (
+      <Button size="lg" iconLeft={<Terminal className="h-4 w-4" />}>
+        Get started
+      </Button>
+    ),
+    secondaryAction: undefined,
+    logos: [
+      { label: "Claude", icon: <Zap className="h-7 w-7" />, x: 16, y: 22 },
+      { label: "OpenAI", icon: <Globe className="h-7 w-7" />, x: 84, y: 20 },
+      { label: "Cursor", icon: <Code className="h-7 w-7" />, x: 12, y: 78 },
+      { label: "Codex", icon: <Box className="h-7 w-7" />, x: 88, y: 76 },
+      { label: "OpenCode", icon: <Terminal className="h-7 w-7" />, x: 30, y: 14 },
+      { label: "Grok", icon: <Cpu className="h-7 w-7" />, x: 70, y: 84 },
+    ],
+  },
+  parameters: {
+    layout: "fullscreen",
+    docs: {
+      description: {
+        story: "Floating logo tiles animate in from off-screen on load, then drift on a mouse parallax based on each tile's depth.",
       },
     },
   },

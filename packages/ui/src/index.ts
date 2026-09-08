@@ -19,7 +19,7 @@ export {
   type SectionHeaderProps,
   type EyebrowStyle,
 } from "./components/Section";
-export { Hero, type HeroProps, type HeroMeta } from "./components/Hero";
+export { Hero, type HeroProps, type HeroMeta, type HeroLogo } from "./components/Hero";
 export { Navbar, type NavbarProps, type NavLink } from "./components/Navbar";
 export {
   MegaMenu,

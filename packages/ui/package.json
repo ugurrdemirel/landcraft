@@ -38,6 +38,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "clean": "rimraf dist",
+    "prepack": "cp ../../README.md ./README.md",
     "prepublishOnly": "pnpm run build"
   },
   "peerDependencies": {

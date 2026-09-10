@@ -5,3 +5,6 @@ storybook-static/
 .DS_Store
 .turbo/
 .env
+
+# Generated at pack time from the root README (see packages/ui prepack script).
+packages/ui/README.md

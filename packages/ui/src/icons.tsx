@@ -224,6 +224,20 @@ export const Play = (props: IconProps) => (
   </svg>
 );
 
+export const Pause = (props: IconProps) => (
+  <svg {...base} {...props}>
+    <path d="M9 5v14" />
+    <path d="M15 5v14" />
+  </svg>
+);
+
+export const RotateCcw = (props: IconProps) => (
+  <svg {...base} {...props}>
+    <path d="M3 12a9 9 0 1 0 2.64-6.36" />
+    <path d="M3 4v5h5" />
+  </svg>
+);
+
 export const ExternalLink = (props: IconProps) => (
   <svg {...base} {...props}>
     <path d="M15 3h6v6" />

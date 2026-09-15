@@ -63,6 +63,12 @@ export {
   type LanguageOption,
 } from "./components/LanguageSwitcher";
 export { Modal, type ModalProps } from "./components/Modal";
+export {
+  AgentDemo,
+  type AgentDemoProps,
+  type AgentDemoOption,
+  type AgentScriptStep,
+} from "./components/AgentDemo";
 export { Newsletter, type NewsletterProps } from "./components/Newsletter";
 export { Prose, ProseLead, type ProseProps, type ProseSize } from "./components/Prose";
 export {
@@ -115,6 +121,8 @@ export {
   Terminal,
   Send,
   Play,
+  Pause,
+  RotateCcw,
   ExternalLink,
   Sliders,
   Database,

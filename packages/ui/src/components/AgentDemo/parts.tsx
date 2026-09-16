@@ -118,10 +118,10 @@ export function DemoFooter({
 export function UserMessage({ text, partial = false }: { text: string; partial?: boolean }) {
   return (
     <div className="flex justify-end">
-      <p className="max-w-[85%] rounded-2xl rounded-br-md bg-primary px-3.5 py-2.5 text-sm leading-6 text-on-primary">
+      <p className="max-w-[85%] rounded-2xl rounded-br-md bg-foreground px-3.5 py-2.5 text-sm leading-6 text-background">
         {text}
         {partial ? (
-          <span className="ml-0.5 inline-block h-4 w-[2px] translate-y-[3px] animate-pulse bg-on-primary" />
+          <span className="ml-0.5 inline-block h-4 w-[2px] translate-y-[3px] animate-pulse bg-background" />
         ) : null}
       </p>
     </div>
@@ -131,7 +131,7 @@ export function UserMessage({ text, partial = false }: { text: string; partial?:
 export function AssistantMessage({ text, partial = false }: { text: string; partial?: boolean }) {
   return (
     <div className="flex justify-start">
-      <p className="max-w-[90%] rounded-2xl rounded-bl-md bg-primary-soft px-3.5 py-2.5 text-sm leading-6 text-foreground">
+      <p className="max-w-[90%] rounded-2xl rounded-bl-md border border-border bg-surface-strong/40 px-3.5 py-2.5 text-sm leading-6">
         {text}
         {partial ? (
           <span className="ml-0.5 inline-block h-4 w-[2px] translate-y-[3px] animate-pulse bg-foreground" />

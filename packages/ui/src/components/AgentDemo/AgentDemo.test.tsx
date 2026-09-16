@@ -198,13 +198,16 @@ describe("AgentDemo", () => {
     expect(screen.getByText("Revenue grew 18%, driven by Nova.")).toBeInTheDocument();
   });
 
-  it("renders message bubbles with primary color tokens", () => {
+  it("renders the agent bubble with primary tokens and keeps the user bubble neutral", () => {
     render(<AgentDemo script={script} option="transcript" />);
-    expect(screen.getByText("Find our Q3 revenue drivers")).toHaveClass(
+    expect(screen.getByText("Revenue grew 18%, driven by Nova.")).toHaveClass(
       "bg-primary",
       "text-on-primary",
     );
-    expect(screen.getByText("Revenue grew 18%, driven by Nova.")).toHaveClass("bg-primary-soft");
+    expect(screen.getByText("Find our Q3 revenue drivers")).toHaveClass(
+      "bg-foreground",
+      "text-background",
+    );
   });
 
   it("renders a 70dvh window with an internally scrolling log by default", () => {

@@ -59,25 +59,30 @@ Every component accepts an `option` / `variant` prop — same API, different loo
 
 | Component | Options |
 | --- | --- |
-| Button | `primary` · `dark` · `outline` · `ghost` · `link` |
+| Button | `primary` · `outline` · `ghost` · `link` (`customColor` for custom fills) |
 | Badge | `soft` · `solid` · `outline` · `dot` |
 | Card | `outlined` · `elevated` · `inset` |
-| Navbar | `classic` · `floating` · `inverse` |
-| MegaMenu | `classic` · `floating` · `inverse` |
-| Hero | `split` · `centered` · `statement` · `parallax` |
+| Navbar | `classic` · `floating` (+ `background`) |
+| MegaMenu | `classic` · `floating` (+ `background`) |
+| Hero | `split` · `centered` · `statement` · `parallax` (+ `background` on `statement`) |
 | LogoCloud | `quiet` · `marquee` · `strip` |
 | FeatureGrid | `columns` · `bento` · `editorialRows` |
 | FeatureShowcase | `mediaSide`: `left` · `right` |
-| Stats | `editorial` · `hairline` · `cells` · `ticker` |
+| Stats | `stacked` · `divided` · `cells` · `ticker` |
 | Pricing | `cards` · `bento` · `compact` |
 | Testimonials | `grid` · `carousel` · `marquee` |
-| CTA | `panel` · `surface` · `inverse` |
+| CTA | `panel` · `surface` (+ `background` on `panel`) |
 | FAQ | `accordion` · `split` · `cards` (`allowMultiple`, `defaultOpen`) |
-| Footer | `classic` · `minimal` · `editorial` |
+| Footer | `columns` · `minimal` · `editorial` (+ `background`) |
 | Newsletter | `inline` · `card` · `underline` |
 | Blog (BlogSection/BlogCard) | `card` · `row` (`limit` shows the latest N posts) |
 | Modal | `size`: `sm` · `md` · `lg` |
 | LanguageSwitcher | `dropdown` · `modal` |
+
+**Layout, not skin.** Variants describe how content is arranged, never its color
+or type — see [DESIGN.md](./DESIGN.md). Emphasis comes from `--color-primary`;
+sections, nav bars and footers accept a `background` prop for a custom surface
+instead of the brand gradient. There are no built-in "inverse"/ink variants.
 
 **Brand mark.** `Navbar`, `MegaMenu` and `Footer` accept a custom logo in place
 of the wordmark: pass any node to `logo` (SVG, `<img>`, component…), or use
@@ -102,7 +107,7 @@ paired `--color-on-*` value; set them together so text stays readable.
 | `--color-primary-hover` | `67 56 202` | Primary hover / pressed |
 | `--color-primary-soft` | `238 242 255` | Soft primary fills (badges, highlights) |
 | `--color-on-primary` | `255 255 255` | Text on primary |
-| `--color-secondary` | `15 15 15` | Ink surfaces (footer, statement, inverse) |
+| `--color-secondary` | `15 15 15` | Neutral ink token (legacy component skins are being retired — see DESIGN.md) |
 | `--color-secondary-hover` | `38 38 38` | Ink surface hover / pressed |
 | `--color-on-secondary` | `250 250 250` | Text on ink surfaces |
 | `--color-accent` | `5 150 105` | Promo / success |

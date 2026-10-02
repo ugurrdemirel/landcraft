@@ -164,7 +164,6 @@ const ProductWindow = () => (
         <div className="rounded-xl border border-border bg-surface p-4">
           <div className="flex flex-wrap items-center gap-2">
             <Button size="sm">Primary</Button>
-            <Button size="sm" variant="dark">Dark</Button>
             <Button size="sm" variant="outline">Outline</Button>
             <Button size="sm" variant="ghost">Ghost</Button>
             <Button size="sm" customColor="#059669">customColor</Button>
@@ -343,9 +342,9 @@ export const Overview: StoryObj = {
             />
           </Specimen>
 
-          <Specimen label="Stats" options="editorial · hairline · cells · ticker">
+          <Specimen label="Stats" options="stacked · divided · cells · ticker">
             <Stats
-              option="hairline"
+              option="divided"
               columns={3}
               stats={[
                 { value: "20+", label: "Components" },
@@ -462,7 +461,7 @@ export const Overview: StoryObj = {
 
       <Section size="sm" id="theming">
         <CTA
-          option="inverse"
+          option="panel"
           title="Ship your next landing page tonight"
           description="One install, one import, and a handful of tokens. Everything else is already designed."
           action={
@@ -477,7 +476,7 @@ export const Overview: StoryObj = {
           secondaryAction={
             <Button
               variant="outline"
-              className="border-white/25 text-current hover:bg-white/10"
+              className="border-current/30 text-current hover:bg-current/10"
               iconLeft={<Terminal className="h-4 w-4" />}
             >
               pnpm add @ugurdemirel/landcraft
@@ -487,7 +486,7 @@ export const Overview: StoryObj = {
       </Section>
 
       <Footer
-        option="classic"
+        option="columns"
         brand={undefined}
         logo={<Brand />}
         description="A React + Tailwind component library for landing and marketing pages. Token-based theming, automatic contrast."
@@ -595,11 +594,10 @@ export const ComponentBoard: StoryObj = {
         </div>
 
         <div className="grid grid-cols-12 items-start gap-4">
-          <Specimen label="Button" options="5 variants · 3 sizes" className="col-span-5">
+          <Specimen label="Button" options="4 variants · 3 sizes" className="col-span-5">
             <div className="space-y-3">
               <div className="flex flex-wrap items-center gap-2">
                 <Button size="sm">Primary</Button>
-                <Button size="sm" variant="dark">Dark</Button>
                 <Button size="sm" variant="outline">Outline</Button>
                 <Button size="sm" variant="ghost">Ghost</Button>
                 <Button size="sm" variant="link">Link</Button>
@@ -709,9 +707,9 @@ export const ComponentBoard: StoryObj = {
             />
           </Specimen>
 
-          <Specimen label="Stats" options="editorial · hairline · ticker" className="col-span-4">
+          <Specimen label="Stats" options="stacked · divided · cells · ticker" className="col-span-4">
             <Stats
-              option="editorial"
+              option="stacked"
               columns={2}
               stats={[
                 { value: "20+", label: "Components" },
@@ -1036,7 +1034,7 @@ export const Preview16x9: StoryObj = {
 
           <Frame label="Footer · classic (inverse)" z={0.34}>
             <Footer
-              option="classic"
+              option="columns"
               brand="Acurio"
               description="Ready-made, token-based marketing components for startups."
               columns={[

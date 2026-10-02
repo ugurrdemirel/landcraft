@@ -38,12 +38,15 @@ export const Overview: StoryObj = {
       <section className="space-y-3 border-t border-border pt-10">
         <h2 className="font-display text-2xl font-semibold tracking-tight text-foreground">Where are the options?</h2>
         <p className="leading-7 text-muted-foreground">
-          Every component has stories under an "Options" heading. For example, Navbar has{" "}
-          <strong className="text-foreground">Classic</strong>, <strong className="text-foreground">Floating</strong>, and{" "}
-          <strong className="text-foreground">Inverse</strong>; Hero has <strong className="text-foreground">Split</strong>,{" "}
-          <strong className="text-foreground">Centered</strong>, and <strong className="text-foreground">Statement</strong> options.
+          Every component has stories under an "Options" heading. Options are{" "}
+          <strong className="text-foreground">layouts</strong>, not skins — switching one changes how
+          content is arranged, never the typography or color. For example, Navbar has{" "}
+          <strong className="text-foreground">Classic</strong> and{" "}
+          <strong className="text-foreground">Floating</strong>; Hero has{" "}
+          <strong className="text-foreground">Split</strong>, <strong className="text-foreground">Centered</strong>,{" "}
+          <strong className="text-foreground">Statement</strong> and <strong className="text-foreground">Parallax</strong>.
           Switch the <strong className="text-foreground">Palette</strong> from the top toolbar — everything
-          adapts instantly through tokens.
+          adapts instantly through tokens. See <code className="rounded bg-surface-strong px-1.5 py-0.5 text-[13px]">DESIGN.md</code> for the contract.
         </p>
       </section>
 
@@ -64,9 +67,9 @@ export const Overview: StoryObj = {
             <Gauge className="mt-1 h-5 w-5 shrink-0 text-primary" />
             <span>
               <strong className="text-foreground">Dynamic surfaces:</strong> in cases like gradient
-              panels, statement heroes, and hex <code className="rounded bg-surface-strong px-1.5 py-0.5 text-[13px]">customColor</code>,{" "}
-              text color is computed with the WCAG luminance formula. Change the palette and
-              contrast never breaks.
+              panels, emphasis bands, and hex <code className="rounded bg-surface-strong px-1.5 py-0.5 text-[13px]">customColor</code>,{" "}
+              text color is computed in CSS with <code className="rounded bg-surface-strong px-1.5 py-0.5 text-[13px]">contrast-color()</code>.
+              Change the palette and contrast never breaks.
             </span>
           </li>
         </ul>
@@ -87,7 +90,7 @@ export const Overview: StoryObj = {
               {[
                 ["--color-primary", "79 70 229", "Primary accent"],
                 ["--color-on-primary", "255 255 255", "Text on primary"],
-                ["--color-secondary", "15 15 15", "Ink surfaces"],
+                ["--color-secondary", "15 15 15", "Neutral ink (legacy skins retiring)"],
                 ["--color-accent", "5 150 105", "Discount / success"],
                 ["--color-background", "250 250 250", "Paper surface"],
                 ["--color-foreground", "17 17 17", "Body text"],

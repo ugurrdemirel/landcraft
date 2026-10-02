@@ -126,7 +126,7 @@ export const EnterpriseSaaS: StoryObj = {
 
       <Section size="sm">
         <Stats
-          option="editorial"
+          option="stacked"
           stats={[
             { value: "$2.4M/mo", label: "Average customer savings" },
             { value: "4.2x", label: "Transaction speedup" },

@@ -1,6 +1,7 @@
 import type { HTMLAttributes, ReactNode } from "react";
 
-export type StatsOption = "editorial" | "hairline" | "cells" | "ticker";
+/** Layout options — arrangement only. */
+export type StatsOption = "stacked" | "divided" | "cells" | "ticker";
 
 export interface Stat {
   value: string;

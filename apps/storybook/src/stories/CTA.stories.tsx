@@ -6,8 +6,9 @@ const meta = {
   component: CTA,
   tags: ["autodocs"],
   argTypes: {
-    option: { control: "radio", options: ["panel", "surface", "inverse"] },
+    option: { control: "radio", options: ["panel", "surface"] },
     align: { control: "radio", options: ["left", "center"] },
+    background: { control: "color" },
   },
   args: {
     option: "panel",
@@ -34,13 +35,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Option1_Panel: Story = {
-  name: "Option 1 · Panel (gradient)",
+  name: "Option 1 · Panel (brand emphasis)",
   args: { option: "panel" },
   parameters: {
     docs: {
       description: {
         story:
-          "A soft gradient panel derived from brand tokens. Text color is computed from --color-primary luminance.",
+          "A brand emphasis panel: a gradient derived from --color-primary, with the text color computed in CSS via contrast-color(). It re-skins with the palette.",
       },
     },
   },
@@ -51,7 +52,7 @@ export const Option2_Surface: Story = {
   args: {
     option: "surface",
     action: (
-      <Button size="lg" variant="dark" iconRight={<ArrowRight className="h-4 w-4" />}>
+      <Button size="lg" iconRight={<ArrowRight className="h-4 w-4" />}>
         Try for free
       </Button>
     ),
@@ -60,26 +61,40 @@ export const Option2_Surface: Story = {
   parameters: {
     docs: {
       description: {
-        story: "A borderless paper band: hairline rule, oversized type, actions on the right.",
+        story: "A borderless paper band: hairline rule, display type, actions on the right.",
       },
     },
   },
 };
 
-export const Option3_Inverse: Story = {
-  name: "Option 3 · Inverse (ink)",
-  args: { option: "inverse" },
+/** Any emphasis panel can opt into a custom background instead of the brand gradient. */
+export const Option3_CustomBackground: Story = {
+  name: "Panel · custom background",
+  args: {
+    option: "panel",
+    background: "#101010",
+    action: (
+      <Button className="bg-surface text-foreground hover:bg-surface-strong" iconRight={<ArrowRight className="h-4 w-4" />}>
+        Try for free
+      </Button>
+    ),
+    secondaryAction: (
+      <Button variant="outline">Talk to sales</Button>
+    ),
+  },
   parameters: {
     docs: {
       description: {
-        story: "Ink background + grain texture. Contrast is computed from the --color-secondary token.",
+        story:
+          "`background` replaces the brand gradient with any CSS color. The text color still comes from CSS `contrast-color()`, so it stays readable.",
       },
     },
   },
 };
 
-export const Centered: Story = {
-  args: { option: "inverse", align: "center" },
+export const PanelCentered: Story = {
+  name: "Panel · centered",
+  args: { option: "panel", align: "center" },
 };
 
 /** The quiet surface option, centered — for a section footer or band. */
@@ -89,7 +104,7 @@ export const SurfaceCentered: Story = {
     option: "surface",
     align: "center",
     action: (
-      <Button size="lg" variant="dark" iconRight={<ArrowRight className="h-4 w-4" />}>
+      <Button size="lg" iconRight={<ArrowRight className="h-4 w-4" />}>
         Try for free
       </Button>
     ),
@@ -97,7 +112,7 @@ export const SurfaceCentered: Story = {
   },
 };
 
-/** All three treatments side by side, so the visual weight is easy to compare. */
+/** Both treatments side by side, so the visual weight is easy to compare. */
 export const AllOptions: Story = {
   name: "All options",
   args: {},
@@ -126,21 +141,7 @@ export const AllOptions: Story = {
           option="surface"
           title="Ready to get started today?"
           action={
-            <Button variant="dark" iconRight={<ArrowRight className="h-4 w-4" />}>
-              Try for free
-            </Button>
-          }
-        />
-      </div>
-      <div className="space-y-2">
-        <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">inverse</p>
-        <CTA
-          option="inverse"
-          title="Ready to get started today?"
-          action={
-            <Button className="bg-surface text-foreground hover:bg-surface-strong" iconRight={<ArrowRight className="h-4 w-4" />}>
-              Try for free
-            </Button>
+            <Button iconRight={<ArrowRight className="h-4 w-4" />}>Try for free</Button>
           }
         />
       </div>

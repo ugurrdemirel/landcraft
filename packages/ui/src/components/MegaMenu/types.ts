@@ -37,7 +37,8 @@ export interface MegaMenuItem {
   external?: boolean;
 }
 
-export type MegaMenuVariant = "classic" | "floating" | "inverse";
+/** Layout options — arrangement only. Tone is the `background` prop. */
+export type MegaMenuVariant = "classic" | "floating";
 
 export interface MegaMenuProps extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   variant?: MegaMenuVariant;
@@ -57,6 +58,12 @@ export interface MegaMenuProps extends Omit<HTMLAttributes<HTMLElement>, "title"
   /** Optional language switcher rendered on the right (desktop) and beside the menu button (mobile). */
   languageSwitcher?: ReactNode;
   sticky?: boolean;
+  /**
+   * Overrides the bar's surface with any CSS color; the text color (and the
+   * text/border of outline/ghost buttons inside it) is derived for contrast via
+   * CSS `contrast-color()`. Use it to tint the bar to a brand or dark color.
+   */
+  background?: string;
   /** Component used to render brand, trigger and panel links. Defaults to `<a>`. Pass your router's `<Link>` (Next.js, Remix, React Router…) for framework-aware navigation. */
   LinkComponent?: ElementType;
 }

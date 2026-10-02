@@ -2,7 +2,7 @@ import { forwardRef, type ButtonHTMLAttributes, type CSSProperties, type ReactNo
 import { cn } from "../utils/cn";
 import { Slot } from "./Slot";
 
-export type ButtonVariant = "primary" | "dark" | "outline" | "ghost" | "link";
+export type ButtonVariant = "primary" | "outline" | "ghost" | "link";
 export type ButtonSize = "sm" | "md" | "lg";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -24,7 +24,6 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variants: Record<ButtonVariant, string> = {
   primary: "bg-primary text-on-primary hover:bg-primary-hover",
-  dark: "bg-secondary text-on-secondary hover:bg-secondary-hover",
   outline:
     "border border-border bg-transparent text-foreground hover:border-foreground/30 hover:bg-surface",
   ghost: "text-foreground hover:bg-surface",
@@ -68,6 +67,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       : style;
 
     const isLink = variant === "link";
+    // Outline/ghost have no fill of their own: on an emphasis band they should
+    // inherit the band's contrast color. Marked here so the CSS has an exact,
+    // unambiguous hook (skipping it for filled buttons and customColor).
+    const unfilled = !customColor && (variant === "outline" || variant === "ghost");
 
     const classes = cn(
       base,
@@ -80,7 +83,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     if (asChild) {
       return (
-        <Slot ref={ref} style={customStyle} className={classes} {...props}>
+        <Slot
+          ref={ref}
+          data-unfilled={unfilled ? "" : undefined}
+          style={customStyle}
+          className={classes}
+          {...props}
+        >
           {children}
         </Slot>
       );
@@ -90,6 +99,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         type={type}
+        data-unfilled={unfilled ? "" : undefined}
         style={customStyle}
         className={classes}
         {...props}

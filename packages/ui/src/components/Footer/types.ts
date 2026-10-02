@@ -25,8 +25,15 @@ export interface FooterProps extends Omit<HTMLAttributes<HTMLElement>, "title"> 
   bottom?: ReactNode;
   /** Optional language switcher rendered in the footer's bottom bar. */
   languageSwitcher?: ReactNode;
-  option?: "classic" | "minimal" | "editorial";
+  /** Layout options — arrangement only. Tone is the `background` prop. */
+  option?: "columns" | "minimal" | "editorial";
   badge?: ReactNode;
+  /**
+   * Overrides the footer surface with any CSS color; text colors are derived for
+   * contrast via CSS `contrast-color()`. Use it to tint the footer to a brand or
+   * dark color.
+   */
+  background?: string;
   /** Component used to render footer links. Defaults to `<a>`. Pass your router's `<Link>` (Next.js, Remix, React Router…) for framework-aware navigation. */
   LinkComponent?: ElementType;
 }

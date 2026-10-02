@@ -6,11 +6,11 @@ const meta = {
   component: Stats,
   tags: ["autodocs"],
   argTypes: {
-    option: { control: "radio", options: ["editorial", "hairline", "cells", "ticker"] },
+    option: { control: "radio", options: ["stacked", "divided", "cells", "ticker"] },
     columns: { control: "radio", options: [2, 3, 4] },
   },
   args: {
-    option: "editorial",
+    option: "stacked",
     columns: 4,
     stats: [
       { value: "12.4K", suffix: "", label: "Active users", delta: 18.2, icon: <Users className="h-5 w-5" />, sub: "+2.1K last month" },
@@ -31,9 +31,9 @@ const growth = [
   { value: "99.99", suffix: "%", label: "Uptime", delta: 0 },
 ];
 
-export const Option1_Editorial: Story = {
-  name: "Option 1 · Editorial",
-  args: { option: "editorial", stats: growth },
+export const Option1_Stacked: Story = {
+  name: "Option 1 · Stacked",
+  args: { option: "stacked", stats: growth },
   parameters: {
     docs: {
       description: {
@@ -43,10 +43,10 @@ export const Option1_Editorial: Story = {
   },
 };
 
-export const Option2_Hairline: Story = {
-  name: "Option 2 · Hairline",
+export const Option2_Divided: Story = {
+  name: "Option 2 · Divided",
   args: {
-    option: "hairline",
+    option: "divided",
     stats: [
       { value: "12.4K", suffix: "", label: "Active users" },
       { value: "1.8", suffix: "ms", label: "Median response" },
@@ -103,7 +103,7 @@ export const Deltas: Story = {
   render: () => (
     <div className="mx-auto max-w-3xl">
       <Stats
-        option="editorial"
+        option="stacked"
         columns={3}
         stats={[
           { value: "+24.6%", label: "Conversions", delta: 24.6 },
@@ -142,7 +142,7 @@ export const LongContent: Story = {
   render: () => (
     <div className="mx-auto max-w-6xl space-y-16">
       <Stats
-        option="editorial"
+        option="stacked"
         columns={3}
         stats={[
           {

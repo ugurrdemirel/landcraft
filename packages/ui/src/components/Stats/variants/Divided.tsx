@@ -3,13 +3,13 @@ import { cn } from "../../../utils/cn";
 import { valueBase, suffixBase, gridCols, gridDivider, DeltaMark } from "../parts";
 import type { Stat } from "../types";
 
-interface HairlineProps extends HTMLAttributes<HTMLDListElement> {
+interface DividedProps extends HTMLAttributes<HTMLDListElement> {
   stats: Stat[];
   columns?: 2 | 3 | 4;
 }
 
-/** hairline — centered numerals in a symmetric run, divided by true vertical hairlines. */
-export const StatsHairline = forwardRef<HTMLDListElement, HairlineProps>(
+/** divided — centered numerals in a symmetric run, divided by true vertical hairlines. */
+export const StatsDivided = forwardRef<HTMLDListElement, DividedProps>(
   ({ className, stats, columns = 4, ...props }, ref) => (
     <dl
       ref={ref}
@@ -45,4 +45,4 @@ export const StatsHairline = forwardRef<HTMLDListElement, HairlineProps>(
     </dl>
   ),
 );
-StatsHairline.displayName = "StatsHairline";
+StatsDivided.displayName = "StatsDivided";

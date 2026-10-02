@@ -149,7 +149,7 @@ export const ArticlePage: StoryObj = {
         title="The next post is yours."
         description="Try the library that produces these articles — free for 14 days."
         action={
-          <Button size="lg" variant="dark" iconRight={<ArrowRight className="h-4 w-4" />}>
+          <Button size="lg" variant="primary" iconRight={<ArrowRight className="h-4 w-4" />}>
             Try for free
           </Button>
         }

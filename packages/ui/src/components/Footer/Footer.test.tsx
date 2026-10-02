@@ -13,7 +13,7 @@ const columns = [
 ];
 
 describe("Footer", () => {
-  it("renders the brand, column headings and links (classic by default)", () => {
+  it("renders the brand, column headings and links (columns by default)", () => {
     render(<Footer brand="Acurio" columns={columns} />);
     expect(screen.getByText("Acurio")).toBeInTheDocument();
     expect(screen.getByText("Product")).toBeInTheDocument();
@@ -22,6 +22,13 @@ describe("Footer", () => {
       "#features",
     );
     expect(screen.getByRole("link", { name: "Pricing" })).toBeInTheDocument();
+  });
+
+  it("sits on the page surface by default (no ink skin)", () => {
+    const { container } = render(<Footer brand="Acurio" columns={columns} />);
+    const footer = container.querySelector("footer")!;
+    expect(footer).toHaveClass("bg-background");
+    expect(footer).not.toHaveClass("bg-secondary");
   });
 
   it("renders a description and the bottom copy", () => {
@@ -40,6 +47,22 @@ describe("Footer", () => {
     expect(screen.getByText("Acurio")).toBeInTheDocument();
     // Editorial uses a large display wordmark.
     expect(container.querySelector("span.text-5xl")).toBeInTheDocument();
+  });
+
+  it("binds a custom background to --lc-bg and marks the footer as an emphasis scope", () => {
+    const { container } = render(<Footer brand="Acurio" columns={columns} background="#101010" />);
+    const footer = container.querySelector("footer")!;
+    expect(footer).toHaveAttribute("style", expect.stringContaining("--lc-bg: #101010"));
+    expect(footer).toHaveAttribute(
+      "style",
+      expect.stringContaining("color: contrast-color(var(--lc-bg))"),
+    );
+    expect(footer).toHaveAttribute("data-emphasis");
+  });
+
+  it("does not leak an unused background prop when not provided", () => {
+    const { container } = render(<Footer brand="Acurio" columns={columns} />);
+    expect(container.querySelector("footer")).not.toHaveAttribute("background");
   });
 
   it("renders a footer element tag", () => {

@@ -37,12 +37,11 @@ export default meta;
  * Change the palette and everything (surfaces, buttons, hero, pricing) re-syncs together.
  */
 export const LaunchDark: StoryObj = {
-  name: "Launch — Inverse",
+  name: "Launch — Statement",
   parameters: { layout: "fullscreen" },
   render: () => (
     <div>
       <Navbar
-        variant="inverse"
         brand="Acurio"
         links={[
           { label: "Product", href: "#" },
@@ -54,14 +53,14 @@ export const LaunchDark: StoryObj = {
         cta={<Button size="sm" iconRight={<ArrowRight className="h-3.5 w-3.5" />}>Start for free</Button>}
       />
 
-      <div className="bg-secondary text-on-secondary">
+      <div>
         <Hero
           variant="statement"
           eyebrow="Acurio · AI marketing"
           title={
             <>
               Set up your page. <br />
-              Go live. <span style={{ fontStyle: "italic", color: "rgb(var(--color-on-secondary))" }}>Scale.</span>
+              Go live. <span style={{ fontStyle: "italic" }}>Scale.</span>
             </>
           }
           description="Hand your landing page worries to the component library. Token-based theming, automatic contrast, zero tech debt."
@@ -71,7 +70,7 @@ export const LaunchDark: StoryObj = {
             </Button>
           }
           secondaryAction={
-            <Button size="lg" variant="outline" className="border-white/25 text-current hover:bg-white/10" iconLeft={<Play className="h-4 w-4" />}>
+            <Button size="lg" variant="outline" className="border-current/30 text-current hover:bg-current/10" iconLeft={<Play className="h-4 w-4" />}>
               Watch demo
             </Button>
           }
@@ -143,7 +142,7 @@ export const LaunchDark: StoryObj = {
 
       <section>
         <CTA
-          option="inverse"
+          option="panel"
           title="Live by tomorrow"
           description="14 days free. No credit card required."
           action={
@@ -152,7 +151,7 @@ export const LaunchDark: StoryObj = {
             </Button>
           }
           secondaryAction={
-            <Button variant="outline" className="border-white/25 text-current hover:bg-white/10">
+            <Button variant="outline" className="border-current/30 text-current hover:bg-current/10">
               See pricing
             </Button>
           }
@@ -160,7 +159,7 @@ export const LaunchDark: StoryObj = {
       </section>
 
       <Footer
-        option="classic"
+        option="columns"
         brand="Acurio"
         description="Ready-made, token-based marketing components for startups."
         columns={[

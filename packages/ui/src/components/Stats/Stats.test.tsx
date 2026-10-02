@@ -9,10 +9,10 @@ const stats = [
   { value: "1.8", suffix: "ms", label: "Response" },
 ];
 
-const options = ["editorial", "hairline", "cells", "ticker"] as const;
+const options = ["stacked", "divided", "cells", "ticker"] as const;
 
 describe("Stats", () => {
-  it("renders labels and values with the editorial option by default", () => {
+  it("renders labels and values with the stacked option by default", () => {
     render(<Stats stats={stats} />);
     expect(screen.getByText("Active users")).toBeInTheDocument();
     expect(screen.getByText("12.4K")).toBeInTheDocument();
@@ -30,10 +30,10 @@ describe("Stats", () => {
   });
 
   it("renders all option layouts", () => {
-    const { rerender } = render(<Stats stats={stats} option="editorial" />);
+    const { rerender } = render(<Stats stats={stats} option="stacked" />);
     expect(screen.getByText("Active users")).toBeInTheDocument();
 
-    rerender(<Stats stats={stats} option="hairline" />);
+    rerender(<Stats stats={stats} option="divided" />);
     expect(screen.getByText("Active users")).toBeInTheDocument();
 
     rerender(<Stats stats={stats} option="cells" />);
@@ -44,7 +44,7 @@ describe("Stats", () => {
   });
 
   it("renders the suffix, delta and supporting copy in every option", () => {
-    const { rerender } = render(<Stats option="editorial" stats={[]} />);
+    const { rerender } = render(<Stats option="stacked" stats={[]} />);
     for (const option of options) {
       rerender(
         <Stats

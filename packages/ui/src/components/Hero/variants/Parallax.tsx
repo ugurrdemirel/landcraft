@@ -9,7 +9,13 @@ import {
   type MutableRefObject,
 } from "react";
 import { cn } from "../../../utils/cn";
-import { HeroActions, HeroEyebrow, heroContainer, heroTitleBase } from "../parts";
+import {
+  HeroActions,
+  HeroEyebrow,
+  heroContainer,
+  heroDescriptionBase,
+  heroTitleType,
+} from "../parts";
 import type { HeroLogo, HeroProps } from "../types";
 
 const DEFAULT_DEPTH = 18;
@@ -35,7 +41,7 @@ function tileEntryOffset(logo: HeroLogo) {
 /** Parallax — centred copy with floating logo tiles that react to the mouse. */
 export const HeroParallax = forwardRef<HTMLElement, HeroProps>(
   (
-    { className, eyebrow, title, description, primaryAction, secondaryAction, meta, media, logos = [], id, ...props },
+    { className, eyebrow, title, description, primaryAction, secondaryAction, meta, media, logos = [], background, id, ...props },
     ref,
   ) => {
     const sectionRef = useRef<HTMLElement | null>(null);
@@ -129,11 +135,11 @@ export const HeroParallax = forwardRef<HTMLElement, HeroProps>(
 
         <div className={cn(heroContainer, "relative z-20 pt-24 pb-20 text-center sm:pt-32 sm:pb-24")}>
           <HeroEyebrow eyebrow={eyebrow} />
-          <h1 className={cn(heroTitleBase, "mt-7 max-w-4xl text-5xl leading-[1.04] sm:text-6xl lg:text-7xl")}>
+          <h1 className={cn(heroTitleType, "mt-7 max-w-4xl text-5xl text-foreground sm:text-6xl lg:text-7xl")}>
             {title}
           </h1>
           {description ? (
-            <p className="mx-auto mt-7 max-w-xl text-pretty leading-relaxed text-muted-foreground sm:text-lg">
+            <p className={cn(heroDescriptionBase, "mx-auto mt-7 max-w-xl text-muted-foreground")}>
               {description}
             </p>
           ) : null}

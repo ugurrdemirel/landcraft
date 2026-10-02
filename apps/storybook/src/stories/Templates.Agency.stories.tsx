@@ -71,7 +71,7 @@ export const AgencyPage: StoryObj = {
           { label: "Contact", href: "#" },
         ]}
         actions={<Button variant="ghost" size="sm">New project →</Button>}
-        cta={<Button size="sm" variant="dark" iconRight={<ArrowRight className="h-3.5 w-3.5" />}>Get in touch</Button>}
+        cta={<Button size="sm" variant="primary" iconRight={<ArrowRight className="h-3.5 w-3.5" />}>Get in touch</Button>}
       />
 
       <Hero
@@ -86,7 +86,7 @@ export const AgencyPage: StoryObj = {
         }
         description="Digital brand, site, and design system. Big type, little play, plenty of work."
         primaryAction={
-          <Button size="lg" variant="dark" iconRight={<ArrowDown className="h-4 w-4" />}>
+          <Button size="lg" variant="primary" iconRight={<ArrowDown className="h-4 w-4" />}>
             See the work
           </Button>
         }
@@ -128,7 +128,7 @@ export const AgencyPage: StoryObj = {
 
       <Section size="sm">
         <Stats
-          option="editorial"
+          option="stacked"
           stats={[
             { value: "6", label: "Design awards", accent: true },
             { value: "48", label: "Product launches" },
@@ -166,7 +166,7 @@ export const AgencyPage: StoryObj = {
         title="Do you have a project?"
         description="The first call is 30 minutes, free, and non-binding."
         action={
-          <Button size="lg" variant="dark" iconRight={<ArrowUpRight className="h-4 w-4" />}>
+          <Button size="lg" variant="primary" iconRight={<ArrowUpRight className="h-4 w-4" />}>
             Contact the studio
           </Button>
         }

@@ -111,13 +111,13 @@ languageSwitcher={<LanguageSwitcher languages={languages} />}
   ),
 };
 
-/** Inverse (dark) navbar — pass `inverse` so the trigger picks up dark-surface colors. */
-export const InInverseNavbar: Story = {
-  name: "In Navbar (inverse)",
+/** Custom-background navbar — pass `background` so the trigger picks up its contrast color. */
+export const InCustomNavbar: Story = {
+  name: "In Navbar (custom background)",
   render: () => (
     <div className="min-h-[22rem]">
       <Navbar
-        variant="inverse"
+        background="#101010"
         brand="Acurio"
         links={links}
 languageSwitcher={<LanguageSwitcher languages={languages} inverse />}

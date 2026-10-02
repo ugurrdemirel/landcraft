@@ -85,7 +85,6 @@ export const WaitingRoom: StoryObj = {
   render: () => (
     <div>
       <Navbar
-        variant="inverse"
         brand="Acurio"
         links={[
           { label: "Product", href: "#" },
@@ -95,7 +94,7 @@ export const WaitingRoom: StoryObj = {
         cta={<Button size="sm" iconLeft={<Mail className="h-3.5 w-3.5" />}>Join the waitlist</Button>}
       />
 
-      <div className="bg-secondary text-on-secondary">
+      <div>
         <Hero
           variant="statement"
           eyebrow="Coming soon"
@@ -152,7 +151,7 @@ export const WaitingRoom: StoryObj = {
 
       <Section size="sm">
         <Stats
-          option="editorial"
+          option="stacked"
           columns={4}
           stats={[
             { value: "2,4K", label: "People in line" },

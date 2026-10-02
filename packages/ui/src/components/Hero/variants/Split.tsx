@@ -1,12 +1,30 @@
 import { forwardRef } from "react";
 import { cn } from "../../../utils/cn";
-import { HeroActions, HeroEyebrow, heroContainer, heroTitleBase } from "../parts";
+import {
+  HeroActions,
+  HeroEyebrow,
+  heroContainer,
+  heroDescriptionBase,
+  heroTitleType,
+} from "../parts";
 import type { HeroProps } from "../types";
 
 /** Split — editorial grid: huge type left, media right, meta rule under. */
 export const HeroSplit = forwardRef<HTMLElement, HeroProps>(
   (
-    { className, eyebrow, title, description, primaryAction, secondaryAction, media, meta, id, ...props },
+    {
+      className,
+      eyebrow,
+      title,
+      description,
+      primaryAction,
+      secondaryAction,
+      media,
+      meta,
+      background,
+      id,
+      ...props
+    },
     ref,
   ) => (
     <section
@@ -21,11 +39,11 @@ export const HeroSplit = forwardRef<HTMLElement, HeroProps>(
       )}>
         <div className="max-w-xl">
           <HeroEyebrow eyebrow={eyebrow} />
-          <h1 className={cn(heroTitleBase, "mt-6 text-5xl leading-[1.03] sm:text-6xl lg:text-7xl")}>
+          <h1 className={cn(heroTitleType, "mt-6 text-5xl text-foreground sm:text-6xl lg:text-7xl")}>
             {title}
           </h1>
           {description ? (
-            <p className="mt-7 max-w-md text-pretty leading-relaxed text-muted-foreground sm:text-lg">
+            <p className={cn(heroDescriptionBase, "mt-7 max-w-md text-muted-foreground")}>
               {description}
             </p>
           ) : null}

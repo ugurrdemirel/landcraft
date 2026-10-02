@@ -26,7 +26,11 @@ export interface LanguageSwitcherProps extends Omit<HTMLAttributes<HTMLDivElemen
   modalTitle?: ReactNode;
   /** Replace the globe icon with the selected language's flag emoji (and show flags in options). */
   showFlag?: boolean;
-  /** Adapts colors for dark surfaces (inverse Navbar, classic Footer). */
+  /**
+   * Adapts the trigger to a custom/emphasis surface (Navbar `background`,
+   * Footer `background`): the trigger inherits `currentColor` instead of the
+   * page tokens. Dropdown options keep paper-surface colors.
+   */
   inverse?: boolean;
 }
 

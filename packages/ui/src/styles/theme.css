@@ -186,6 +186,33 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
 }
 
+/*
+ * Emphasis bands (CTA panel, Hero statement, custom-background Navbar/MegaMenu/
+ * Footer) paint their own background and derive one readable text color with
+ * contrast-color(). Buttons inside them must adapt to THAT color, not to the
+ * page's --color-foreground/--color-border (which would disappear on a dark
+ * custom background).
+ *
+ * CSS contrast-color() cannot read an ancestor's background, so the band cannot
+ * compute a per-button contrast color. Instead the band exposes its resolved
+ * color via `currentColor`, and this scope lets unfilled buttons inherit it.
+ *
+ * Only buttons marked `data-unfilled` (outline/ghost — see Button.tsx) adapt;
+ * filled buttons (primary, `bg-surface`, `customColor`) keep their own
+ * background and contrast-color() text. The markup hook is exact, avoiding
+ * brittle `hover:bg-surface` substring matches.
+ *
+ * Applied via `data-emphasis` on the band (see CTA/Hero/Navbar/MegaMenu/Footer).
+ */
+[data-emphasis] :is(button, a)[data-unfilled] {
+  color: currentColor;
+  border-color: color-mix(in srgb, currentColor 30%, transparent);
+}
+[data-emphasis] :is(button, a)[data-unfilled]:hover {
+  border-color: color-mix(in srgb, currentColor 55%, transparent);
+  background-color: color-mix(in srgb, currentColor 10%, transparent);
+}
+
 @utility mask-fade-x {
   mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
 }

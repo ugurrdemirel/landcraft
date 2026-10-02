@@ -88,7 +88,7 @@ export const DeveloperTools: StoryObj = {
           { label: "Pricing", href: "#" },
           { label: "Playground", href: "#" },
         ]}
-        cta={<Button size="sm" variant="dark" iconRight={<ArrowUpRight className="h-3.5 w-3.5" />}>Open console</Button>}
+        cta={<Button size="sm" variant="primary" iconRight={<ArrowUpRight className="h-3.5 w-3.5" />}>Open console</Button>}
       />
 
       <Hero
@@ -102,7 +102,7 @@ export const DeveloperTools: StoryObj = {
         }
         description="Monorepo design system, token-based theming, and automatic contrast. Start on the command line, ship in minutes."
         primaryAction={
-          <Button size="lg" variant="dark" iconRight={<ArrowRight className="h-4 w-4" />}>
+          <Button size="lg" variant="primary" iconRight={<ArrowRight className="h-4 w-4" />}>
             Install now
           </Button>
         }
@@ -186,7 +186,7 @@ export const DeveloperTools: StoryObj = {
       </Section>
 
       <CTA
-        option="inverse"
+        option="panel"
         title="From your terminal in 60 seconds."
         description="Start with npm i. Not a single step more until launch."
         action={
@@ -197,7 +197,7 @@ export const DeveloperTools: StoryObj = {
       />
 
       <Footer
-        option="classic"
+        option="columns"
         brand="Acurio ⌘"
         description="Token-based, contrast-guaranteed marketing components for developers."
         columns={[
@@ -244,7 +244,7 @@ export const ApiReference: StoryObj = {
         </div>
       </Section>
       <Section size="sm">
-        <Stats option="editorial" stats={[{ value: "24", label: "Endpoints" }, { value: "99.9%", label: "SLA" }, { value: "12ms", label: "P95" }, { value: "4", label: "Regions" }]} />
+        <Stats option="stacked" stats={[{ value: "24", label: "Endpoints" }, { value: "99.9%", label: "SLA" }, { value: "12ms", label: "P95" }, { value: "4", label: "Regions" }]} />
       </Section>
     </div>
   ),

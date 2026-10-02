@@ -3,13 +3,13 @@ import { cn } from "../../../utils/cn";
 import { valueBase, suffixBase, gridCols, DeltaMark } from "../parts";
 import type { Stat } from "../types";
 
-interface EditorialProps extends HTMLAttributes<HTMLDListElement> {
+interface StackedProps extends HTMLAttributes<HTMLDListElement> {
   stats: Stat[];
   columns?: 2 | 3 | 4;
 }
 
-/** editorial — a ruled ledger: label on the rule, oversized numeral, typed meta. */
-export const StatsEditorial = forwardRef<HTMLDListElement, EditorialProps>(
+/** stacked — a ruled ledger: label on the rule, oversized numeral, typed meta. */
+export const StatsStacked = forwardRef<HTMLDListElement, StackedProps>(
   ({ className, stats, columns = 4, ...props }, ref) => (
     <dl
       ref={ref}
@@ -42,4 +42,4 @@ export const StatsEditorial = forwardRef<HTMLDListElement, EditorialProps>(
     </dl>
   ),
 );
-StatsEditorial.displayName = "StatsEditorial";
+StatsStacked.displayName = "StatsStacked";

@@ -27,6 +27,21 @@ describe("Button", () => {
     expect(screen.getByRole("button", { name: "Ghost" })).toHaveClass("hover:bg-surface");
   });
 
+  it("marks outline/ghost as unfilled so emphasis bands can inherit their contrast color", () => {
+    const { rerender } = render(<Button variant="outline">Outline</Button>);
+    expect(screen.getByRole("button", { name: "Outline" })).toHaveAttribute("data-unfilled");
+
+    rerender(<Button variant="ghost">Ghost</Button>);
+    expect(screen.getByRole("button", { name: "Ghost" })).toHaveAttribute("data-unfilled");
+
+    // Filled variants keep their own background + contrast text.
+    rerender(<Button variant="primary">Primary</Button>);
+    expect(screen.getByRole("button", { name: "Primary" })).not.toHaveAttribute("data-unfilled");
+
+    rerender(<Button customColor="#059669">Custom</Button>);
+    expect(screen.getByRole("button", { name: "Custom" })).not.toHaveAttribute("data-unfilled");
+  });
+
   it("applies the link variant underline behavior", () => {
     render(<Button variant="link">Link</Button>);
     expect(screen.getByRole("button", { name: "Link" })).toHaveClass("hover:underline");

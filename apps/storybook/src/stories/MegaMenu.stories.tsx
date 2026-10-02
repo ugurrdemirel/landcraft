@@ -12,8 +12,9 @@ const meta = {
   component: MegaMenu,
   tags: ["autodocs"],
   argTypes: {
-    variant: { control: "radio", options: ["classic", "floating", "inverse"] },
+    variant: { control: "radio", options: ["classic", "floating"] },
     sticky: { control: "boolean" },
+    background: { control: "color" },
   },
   args: {
     variant: "classic",
@@ -205,14 +206,15 @@ export const WithLanguageSwitcher: Story = {
   ],
 };
 
-/** Inverse — ink bar for dark/statement sites. */
-export const Option3_Inverse: Story = {
-  name: "Option 3 · Inverse",
-  args: { variant: "inverse" },
+/** Custom background — tint the bar to any color; triggers adapt via contrast-color(). */
+export const Option3_CustomBackground: Story = {
+  name: "Option 3 · Custom background",
+  args: { variant: "classic", background: "#101010" },
   parameters: {
     docs: {
       description: {
-        story: "Ink-black surface; panel flips to a dark card and tokens from `--color-on-secondary`.",
+        story:
+          "Pass `background` any CSS color. Triggers and mobile controls inherit the bar's contrast color; the dropdown stays a legible paper card.",
       },
     },
   },

@@ -37,7 +37,7 @@ export const Option1_Editorial: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Label on top, hairline rule, oversized type; optional growth/decline badge.",
+        story: "Ruled ledger: sentence-case label on the rule, oversized Space Grotesk numeral, typed delta and supporting copy below.",
       },
     },
   },
@@ -57,7 +57,7 @@ export const Option2_Hairline: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Numbers side by side, separated by hairline rules. Quiet and symmetrical.",
+        story: "Centered numerals in a symmetric run, divided by true vertical hairlines. Quiet and even.",
       },
     },
   },
@@ -75,7 +75,7 @@ export const Option3_Cells: Story = {
       { value: "38", suffix: "", label: "Connected systems", icon: <Zap className="h-5 w-5" /> },
     ],
   },
-  parameters: { docs: { description: { story: "Quiet cells with icon + value." } } },
+  parameters: { docs: { description: { story: "One framed spec matrix — cells separated by real hairlines, not detached cards. Label sits opposite the icon." } } },
 };
 
 export const Option4_Ticker: Story = {
@@ -90,7 +90,7 @@ export const Option4_Ticker: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Horizontal band; growth uses `--color-accent`, decline uses `--color-danger` (semantic token).",
+        story: "One horizontal readout band, ruled top and bottom. Delta marks are type, not pills: the arrow carries accent/danger, the figure stays high-contrast, zero reads neutral.",
       },
     },
   },
@@ -99,7 +99,7 @@ export const Option4_Ticker: Story = {
 export const Deltas: Story = {
   name: "Delta badges (accent/danger)",
   args: {},
-  parameters: { layout: "padded", docs: { description: { story: "delta < 0 → danger, delta > 0 → accent, delta ≈ 0 → neutral." } } },
+  parameters: { layout: "padded", docs: { description: { story: "Arrow tint: delta < 0 → danger, delta > 0 → accent, delta = 0 → neutral." } } },
   render: () => (
     <div className="mx-auto max-w-3xl">
       <Stats
@@ -125,4 +125,51 @@ export const WithCurrency: Story = {
       { value: "18.4", suffix: "%", label: "Upsell", delta: 12.1 },
     ],
   },
+};
+
+export const LongContent: Story = {
+  name: "Long content (no delta)",
+  args: {},
+  parameters: {
+    layout: "padded",
+    docs: {
+      description: {
+        story:
+          "Real copy at width: long labels and values, missing deltas, and a dangling final row must not overflow or break the rules.",
+      },
+    },
+  },
+  render: () => (
+    <div className="mx-auto max-w-6xl space-y-16">
+      <Stats
+        option="editorial"
+        columns={3}
+        stats={[
+          {
+            value: "12,480,921",
+            label: "Monthly active accounts",
+            sub: "Across every connected workspace",
+          },
+          { value: "99.998", suffix: "%", label: "Rolling 90-day uptime", accent: true },
+          { value: "3.2", suffix: "s", label: "Median time to first value" },
+        ]}
+      />
+      <Stats
+        option="cells"
+        columns={2}
+        stats={[
+          {
+            value: "1,284",
+            label: "Enterprise seats provisioned",
+            icon: <Users className="h-5 w-5" />,
+          },
+          {
+            value: "42,918",
+            label: "Events ingested per second",
+            icon: <Zap className="h-5 w-5" />,
+          },
+        ]}
+      />
+    </div>
+  ),
 };

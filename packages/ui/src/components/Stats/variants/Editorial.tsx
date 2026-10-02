@@ -1,6 +1,6 @@
 import { forwardRef, type HTMLAttributes } from "react";
 import { cn } from "../../../utils/cn";
-import { valueBase, suffixBase, gridCols, DeltaBadge } from "../parts";
+import { valueBase, suffixBase, gridCols, DeltaMark } from "../parts";
 import type { Stat } from "../types";
 
 interface EditorialProps extends HTMLAttributes<HTMLDListElement> {
@@ -8,30 +8,34 @@ interface EditorialProps extends HTMLAttributes<HTMLDListElement> {
   columns?: 2 | 3 | 4;
 }
 
-/** editorial — label above, oversized number, hairline rule under. */
+/** editorial — a ruled ledger: label on the rule, oversized numeral, typed meta. */
 export const StatsEditorial = forwardRef<HTMLDListElement, EditorialProps>(
   ({ className, stats, columns = 4, ...props }, ref) => (
-    <dl ref={ref} className={cn("grid grid-cols-1 gap-x-10 gap-y-12", gridCols[columns], className)} {...props}>
+    <dl
+      ref={ref}
+      className={cn("grid grid-cols-1 gap-x-10 gap-y-10", gridCols[columns], className)}
+      {...props}
+    >
       {stats.map((stat) => (
-        <div key={stat.label} className="border-t border-border pt-6">
-          <div className="flex items-center justify-between gap-3">
-            <dt className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-              {stat.label}
-            </dt>
-            {typeof stat.delta === "number" ? <DeltaBadge delta={stat.delta} /> : null}
-          </div>
+        <div key={stat.label} className="border-t border-border pt-5">
+          <dt className="text-sm leading-5 text-muted-foreground">{stat.label}</dt>
           <dd
             className={cn(
               valueBase,
-              "mt-4 text-5xl sm:text-6xl",
+              "mt-3 text-5xl sm:text-6xl",
               stat.accent ? "text-primary" : undefined,
             )}
           >
             {stat.value}
             {stat.suffix ? <span className={suffixBase}>{stat.suffix}</span> : null}
           </dd>
-          {stat.sub ? (
-            <p className="mt-3 max-w-xs text-[13px] leading-5 text-muted-foreground">{stat.sub}</p>
+          {typeof stat.delta === "number" || stat.sub ? (
+            <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              {typeof stat.delta === "number" ? <DeltaMark delta={stat.delta} /> : null}
+              {stat.sub ? (
+                <p className="text-[13px] leading-5 text-muted-foreground">{stat.sub}</p>
+              ) : null}
+            </div>
           ) : null}
         </div>
       ))}

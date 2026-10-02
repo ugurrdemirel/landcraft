@@ -7,7 +7,7 @@ export interface Stat {
   label: string;
   /** Small unit rendered inline with the value, e.g. "ms" or "₺". */
   suffix?: string;
-  /** Trend change in percent — renders an up/down badge. */
+  /** Trend change in percent — renders a directional delta mark. */
   delta?: number;
   /** Optional supporting copy. */
   sub?: string;

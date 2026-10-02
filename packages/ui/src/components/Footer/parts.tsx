@@ -41,7 +41,7 @@ export function FooterWordmark({ brand }: { brand?: ReactNode }) {
 
 export function FooterEditorialWordmark({ brand }: { brand?: ReactNode }) {
   return (
-    <span className="font-display text-5xl font-bold tracking-[-0.03em] text-foreground sm:text-7xl">
+    <span className="font-display text-5xl font-bold tracking-[-0.03em] text-current sm:text-7xl">
       {brand}
     </span>
   );
@@ -51,16 +51,18 @@ export function FooterColumnsBlock({
   columns,
   Link,
   linkClassName,
+  columnTitleClassName = "text-muted-foreground",
 }: {
   columns: FooterColumn[];
   Link: ElementType;
   linkClassName: string;
+  columnTitleClassName?: string;
 }) {
   return (
     <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
       {columns.map((column) => (
         <div key={column.title}>
-          <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+          <h3 className={cn("text-xs font-semibold uppercase tracking-[0.16em]", columnTitleClassName)}>
             {column.title}
           </h3>
           <ul className="mt-4 space-y-2.5">

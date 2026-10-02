@@ -123,9 +123,14 @@ describe("MegaMenu", () => {
     });
   });
 
-  it("applies the inverse variant to the header shell", () => {
-    render(<MegaMenu brand="Acurio" items={items} variant="inverse" />);
-    expect(screen.getByRole("banner")).toHaveClass("bg-[#101010]/85");
+  it("tints the bar with a custom background and marks it as an emphasis scope", () => {
+    render(<MegaMenu brand="Acurio" items={items} background="#101010" />);
+    const banner = screen.getByRole("banner");
+    expect(banner).toHaveAttribute("data-emphasis");
+    expect(banner).toHaveAttribute(
+      "style",
+      expect.stringContaining("--lc-bg: #101010"),
+    );
   });
 
   it("toggles the mobile menu via the hamburger", () => {

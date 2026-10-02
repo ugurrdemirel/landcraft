@@ -7,7 +7,8 @@ export interface NavLink {
   external?: boolean;
 }
 
-export type NavbarVariant = "classic" | "floating" | "inverse";
+/** Layout options — arrangement only. Tone is the `background` prop. */
+export type NavbarVariant = "classic" | "floating";
 
 export interface NavbarProps extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   variant?: NavbarVariant;
@@ -27,6 +28,12 @@ export interface NavbarProps extends Omit<HTMLAttributes<HTMLElement>, "title"> 
   /** Optional language switcher rendered on the right (desktop) and beside the menu button (mobile). */
   languageSwitcher?: ReactNode;
   sticky?: boolean;
+  /**
+   * Overrides the bar's surface with any CSS color; the text color (and the
+   * text/border of outline/ghost buttons inside it) is derived for contrast via
+   * CSS `contrast-color()`. Use it to tint the bar to a brand or dark color.
+   */
+  background?: string;
   /** Component used to render the brand and nav links. Defaults to `<a>`. Pass your router's `<Link>` (Next.js, Remix, React Router…) for framework-aware navigation. */
   LinkComponent?: ElementType;
 }

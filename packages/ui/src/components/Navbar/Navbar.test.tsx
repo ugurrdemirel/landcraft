@@ -65,11 +65,18 @@ describe("Navbar", () => {
     expect(screen.getByRole("banner")).toHaveClass("bg-background/85");
   });
 
-  it("applies the inverse variant shell and on-secondary link tokens", () => {
-    render(<Navbar brand="Acurio" links={links} variant="inverse" />);
-    expect(screen.getByRole("banner")).toHaveClass("bg-[#101010]/85");
-    const productLinks = screen.getAllByRole("link", { name: "Product" });
-    expect(productLinks[0]).toHaveClass("text-on-secondary/60");
+  it("tints the bar with a custom background and marks it as an emphasis scope", () => {
+    render(<Navbar brand="Acurio" links={links} background="#101010" />);
+    const banner = screen.getByRole("banner");
+    expect(banner).toHaveAttribute("data-emphasis");
+    expect(banner).toHaveAttribute(
+      "style",
+      expect.stringContaining("--lc-bg: #101010"),
+    );
+    expect(banner).toHaveAttribute(
+      "style",
+      expect.stringContaining("color: contrast-color(var(--lc-bg))"),
+    );
   });
 
   it("renders a custom logo instead of the wordmark", () => {

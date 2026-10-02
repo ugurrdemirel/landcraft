@@ -2,6 +2,7 @@
 import { useId, useState } from "react";
 import { cn } from "../../utils/cn";
 import { ChevronDown, Menu, X } from "../../icons";
+import { emphasisSurfaceStyle } from "../../utils/surface";
 import type { MegaMenuProps, MegaMenuVariant, MegaMenuItem } from "./types";
 
 interface MegaMenuStyle {
@@ -22,9 +23,6 @@ interface MegaMenuStyle {
   brandDot: string;
 }
 
-const inverse = "text-on-secondary";
-const light = "text-foreground";
-
 const styles: Record<MegaMenuVariant, MegaMenuStyle> = {
   classic: {
     shell: "border-b border-border bg-background/85 backdrop-blur-md supports-[backdrop-filter]:bg-background/75",
@@ -38,9 +36,9 @@ const styles: Record<MegaMenuVariant, MegaMenuStyle> = {
     columnLink: "hover:bg-surface-strong",
     linkDescription: "text-muted-foreground",
     mobilePanel: "border-t border-border bg-background",
-    mobileButton: `${light} hover:bg-surface`,
+    mobileButton: "text-foreground hover:bg-surface",
     mobileLink: "text-muted-foreground hover:bg-surface hover:text-foreground",
-    brandText: light,
+    brandText: "text-foreground",
     brandDot: "bg-foreground",
   },
   floating: {
@@ -55,28 +53,34 @@ const styles: Record<MegaMenuVariant, MegaMenuStyle> = {
     columnLink: "hover:bg-surface-strong",
     linkDescription: "text-muted-foreground",
     mobilePanel: "mx-3 mb-3 max-w-5xl overflow-hidden rounded-b-xl border border-border bg-surface",
-    mobileButton: `${light} hover:bg-surface`,
+    mobileButton: "text-foreground hover:bg-surface",
     mobileLink: "text-muted-foreground hover:bg-surface hover:text-foreground",
-    brandText: light,
+    brandText: "text-foreground",
     brandDot: "bg-foreground",
   },
-  inverse: {
-    shell: "border-b border-white/10 bg-[#101010]/85 backdrop-blur-md",
-    bar: "mx-auto max-w-6xl px-5 sm:px-8",
-    header: "px-0",
-    trigger: "text-on-secondary/60 hover:text-on-secondary hover:bg-white/10",
-    triggerOpen: "bg-white/10 text-on-secondary",
-    badge: "bg-white/15 text-on-secondary",
-    panel: "border-white/10 bg-[#161616]",
-    columnTitle: "text-on-secondary/45",
-    columnLink: "hover:bg-white/10",
-    linkDescription: "text-on-secondary/50",
-    mobilePanel: "border-t border-white/10 bg-[#101010]",
-    mobileButton: `${inverse} hover:bg-white/10`,
-    mobileLink: "text-on-secondary/70 hover:bg-white/10 hover:text-on-secondary",
-    brandText: inverse,
-    brandDot: "bg-on-secondary",
-  },
+};
+
+/**
+ * On an emphasis (custom-background) bar the triggers and mobile controls inherit
+ * the resolved contrast color instead of the page tokens. The dropdown panel
+ * stays a paper card for legibility.
+ */
+const emphatic: MegaMenuStyle = {
+  shell: "",
+  bar: "mx-auto max-w-6xl px-5 sm:px-8",
+  header: "px-0",
+  trigger: "text-current/70 hover:text-current hover:bg-current/10",
+  triggerOpen: "bg-current/15 text-current",
+  badge: "bg-current/20 text-current",
+  panel: "border-border bg-surface shadow-raised",
+  columnTitle: "text-muted-foreground/70",
+  columnLink: "hover:bg-surface-strong",
+  linkDescription: "text-muted-foreground",
+  mobilePanel: "border-t border-current/15",
+  mobileButton: "text-current hover:bg-current/10",
+  mobileLink: "text-current/70 hover:bg-current/10 hover:text-current",
+  brandText: "text-current",
+  brandDot: "bg-current",
 };
 
 export const MegaMenu = ({
@@ -93,8 +97,10 @@ export const MegaMenu = ({
   cta,
   languageSwitcher,
   sticky = true,
+  background,
   LinkComponent,
   onKeyDown,
+  style,
   ...props
 }: MegaMenuProps) => {
   const ids = useId();
@@ -102,7 +108,8 @@ export const MegaMenu = ({
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<number | null>(null);
-  const s = styles[variant];
+  const s = background ? emphatic : styles[variant];
+  const floating = !background && variant === "floating";
 
   const closePanels = () => setOpenIndex(null);
   const closeAll = () => {
@@ -245,6 +252,8 @@ export const MegaMenu = ({
 
   return (
     <header
+      data-emphasis={background ? "" : undefined}
+      style={background ? { ...emphasisSurfaceStyle(background), ...style } : style}
       className={cn(
         "relative w-full transition-colors duration-200",
         sticky && "sticky top-0 z-50",
@@ -344,7 +353,7 @@ export const MegaMenu = ({
             onMouseEnter={() => setOpenIndex(i)}
             className={cn(
               "absolute top-full z-50 pt-2 transition-all duration-150",
-              variant === "floating" ? "inset-x-0 mx-auto w-full max-w-5xl" : "inset-x-0",
+              floating ? "inset-x-0 mx-auto w-full max-w-5xl" : "inset-x-0",
               open
                 ? "visible translate-y-0 opacity-100"
                 : "pointer-events-none invisible -translate-y-1 opacity-0",
@@ -373,6 +382,7 @@ export const MegaMenu = ({
           "grid transition-[grid-template-rows,opacity] duration-200 lg:hidden",
           mobileOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
           s.mobilePanel,
+          background && "bg-transparent",
         )}
       >
         <div className="min-h-0 overflow-hidden">

@@ -6,10 +6,10 @@ const meta = {
   component: Footer,
   tags: ["autodocs"],
   argTypes: {
-    option: { control: "radio", options: ["classic", "minimal", "editorial"] },
+    option: { control: "radio", options: ["columns", "minimal", "editorial"] },
   },
   args: {
-    option: "classic",
+    option: "columns",
     brand: "Acurio",
     description:
       "Ready-made, token-based, accessible marketing components for startups.",
@@ -26,7 +26,7 @@ const meta = {
             key={label}
             href="#"
             aria-label={`Social ${label}`}
-            className="grid h-9 w-9 place-items-center rounded-full border border-border text-xs font-semibold text-muted-foreground transition-colors duration-150 hover:border-foreground/30 hover:text-foreground"
+            className="grid h-9 w-9 place-items-center rounded-full border border-current/20 text-xs font-semibold text-current/70 transition-colors duration-150 hover:border-current/40 hover:text-current"
           >
             {label}
           </a>
@@ -40,9 +40,9 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Option1_Classic: Story = {
-  name: "Option 1 · Classic (inverse)",
-  args: { option: "classic" },
+export const Option1_Columns: Story = {
+  name: "Option 1 · Columns",
+  args: { option: "columns" },
   render: (args) => <Footer {...args} />,
 };
 
@@ -57,12 +57,30 @@ export const Option3_Editorial: Story = {
 };
 
 export const WithNewsletter: Story = {
-  name: "Classic + Newsletter badge",
+  name: "Columns + Newsletter badge",
   args: {
-    option: "classic",
+    option: "columns",
     badge: (
       <Newsletter option="card" placeholder="you@company.com" note="Once a month. No spam." />
     ),
+  },
+};
+
+/** Any footer layout can opt into a custom background instead of the page surface. */
+export const CustomBackground: Story = {
+  name: "Columns · custom background",
+  args: {
+    option: "columns",
+    background: "#101010",
+  },
+  parameters: {
+    layout: "fullscreen",
+    docs: {
+      description: {
+        story:
+          "Pass `background` any CSS color; the footer's text adapts via CSS `contrast-color()`. No ink variant required.",
+      },
+    },
   },
 };
 

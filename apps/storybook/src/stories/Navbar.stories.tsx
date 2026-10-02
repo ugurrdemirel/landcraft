@@ -6,8 +6,9 @@ const meta = {
   component: Navbar,
   tags: ["autodocs"],
   argTypes: {
-    variant: { control: "radio", options: ["classic", "floating", "inverse"] },
+    variant: { control: "radio", options: ["classic", "floating"] },
     sticky: { control: "boolean" },
+    background: { control: "color" },
   },
   args: {
     variant: "classic",
@@ -71,14 +72,15 @@ export const Option2_Floating: Story = {
   ],
 };
 
-/** Inverse — full-bleed ink bar for dark/statement sites. */
-export const Option3_Inverse: Story = {
-  name: "Option 3 · Inverse",
-  args: { variant: "inverse" },
+/** Custom background — tint the bar to any color; text and buttons adapt via contrast-color(). */
+export const Option3_CustomBackground: Story = {
+  name: "Option 3 · Custom background",
+  args: { variant: "classic", background: "#101010" },
   parameters: {
     docs: {
       description: {
-        story: "Ink-black surface; text comes from the `--color-on-secondary` token.",
+        story:
+          "Pass `background` any CSS color. The bar's text derives its contrast color in CSS, and links/outline buttons inherit it — no ink variant.",
       },
     },
   },

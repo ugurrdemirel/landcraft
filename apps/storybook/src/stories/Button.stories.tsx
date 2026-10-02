@@ -8,7 +8,7 @@ const meta = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["primary", "dark", "outline", "ghost", "link"],
+      options: ["primary", "outline", "ghost", "link"],
     },
     size: { control: "select", options: ["sm", "md", "lg"] },
     customColor: { control: "color" },
@@ -30,7 +30,6 @@ const Row = ({ children }: { children: React.ReactNode }) => (
 );
 
 export const Primary: Story = { args: { variant: "primary", iconRight: undefined, children: "Primary button" } };
-export const Dark: Story = { args: { variant: "dark", iconRight: undefined, children: "Dark / ink button" } };
 export const Outline: Story = { args: { variant: "outline", iconRight: undefined, children: "Outline button" } };
 export const Ghost: Story = { args: { variant: "ghost", iconRight: undefined, children: "Ghost button" } };
 export const Link: Story = { args: { variant: "link", iconRight: undefined, children: "Link button" } };
@@ -52,14 +51,13 @@ export const AllVariants: Story = {
     <div className="flex flex-col gap-6 p-6">
       <Row>
         <Button variant="primary">Primary</Button>
-        <Button variant="dark">Dark</Button>
         <Button variant="outline">Outline</Button>
         <Button variant="ghost">Ghost</Button>
         <Button variant="link">Link</Button>
       </Row>
       <Row>
         <Button variant="primary" iconLeft={<Play className="h-4 w-4" />}>Watch video</Button>
-        <Button variant="dark" iconRight={<ArrowRight className="h-4 w-4" />}>Start</Button>
+        <Button variant="primary" iconRight={<ArrowRight className="h-4 w-4" />}>Start</Button>
         <Button variant="outline">Log in</Button>
         <Button variant="ghost" iconRight={<ArrowRight className="h-4 w-4" />}>Read more</Button>
       </Row>
@@ -82,29 +80,30 @@ export const IconOnly: Story = {
     <Row>
       <Button size="sm" iconRight={<ArrowRight className="h-3.5 w-3.5" />} aria-label="Next step" />
       <Button iconRight={<Menu className="h-4 w-4" />} aria-label="Open menu" />
-      <Button size="lg" variant="dark" iconRight={<ArrowRight className="h-4 w-4" />} aria-label="Get started" />
+      <Button size="lg" variant="primary" iconRight={<ArrowRight className="h-4 w-4" />} aria-label="Get started" />
     </Row>
   ),
 };
 
-/** All variants on an ink surface — shows how `dark` and `outline` adapt to dark contexts. */
-export const OnInkSurface: Story = {
+/** Variants on a custom emphasis surface — outline/ghost inherit the surface's contrast color. */
+export const OnCustomSurface: Story = {
+  name: "On custom surface",
   args: {},
   parameters: {
     layout: "padded",
     docs: {
       description: {
         story:
-          "The same variants on a `--color-secondary` (ink) background. `dark` uses the ink token, `outline`/`ghost` expect a light surface — tint them with a class when needed.",
+          "A custom background (here with `customColor`) resolves one readable text color via CSS `contrast-color()`. `outline`/`ghost` buttons marked with `data-emphasis` inherit it, so they never disappear.",
       },
     },
   },
   render: () => (
-    <div className="rounded-2xl bg-secondary p-10">
+    <div data-emphasis className="rounded-2xl bg-[#101010] p-10 text-white">
       <Row>
         <Button className="bg-surface text-foreground hover:bg-surface-strong">On-brand light</Button>
-        <Button variant="outline" className="border-white/25 text-current hover:bg-white/10">Outline</Button>
-        <Button variant="ghost" className="text-current hover:bg-white/10">Ghost</Button>
+        <Button variant="outline">Outline</Button>
+        <Button variant="ghost">Ghost</Button>
         <Button variant="link" className="text-current">Link</Button>
       </Row>
     </div>
@@ -178,7 +177,7 @@ export const WithIcons: Story = {
   render: () => (
     <Row>
       <Button variant="primary" iconLeft={<Zap className="h-4 w-4" />}>Leading icon</Button>
-      <Button variant="dark" iconRight={<ArrowUpRight className="h-4 w-4" />}>Trailing icon</Button>
+      <Button variant="primary" iconRight={<ArrowUpRight className="h-4 w-4" />}>Trailing icon</Button>
       <Button variant="outline" iconLeft={<Play className="h-4 w-4" />} iconRight={<ArrowRight className="h-4 w-4" />}>Both</Button>
     </Row>
   ),

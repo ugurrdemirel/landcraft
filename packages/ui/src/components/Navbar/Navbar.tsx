@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { cn } from "../../utils/cn";
 import { Menu, X } from "../../icons";
+import { emphasisSurfaceStyle } from "../../utils/surface";
 import type { NavbarProps, NavbarVariant } from "./types";
 
 interface NavbarStyle {
@@ -17,9 +18,6 @@ interface NavbarStyle {
   desktopList: string;
 }
 
-const inverse = "text-on-secondary";
-const light = "text-foreground";
-
 const styles: Record<NavbarVariant, NavbarStyle> = {
   classic: {
     shell: "border-b border-border bg-background/85 backdrop-blur-md supports-[backdrop-filter]:bg-background/75",
@@ -29,8 +27,8 @@ const styles: Record<NavbarVariant, NavbarStyle> = {
     mobilePanel: "border-t border-border bg-background",
     mobileLink:
       "text-muted-foreground hover:bg-surface hover:text-foreground",
-    menuButton: `${light} hover:bg-surface`,
-    brandText: light,
+    menuButton: "text-foreground hover:bg-surface",
+    brandText: "text-foreground",
     brandDot: "bg-foreground",
     desktopList: "hidden items-center gap-7 md:flex",
   },
@@ -43,24 +41,28 @@ const styles: Record<NavbarVariant, NavbarStyle> = {
       "mx-3 mb-3 max-w-5xl overflow-hidden rounded-b-xl border border-border bg-surface",
     mobileLink:
       "text-muted-foreground hover:bg-surface hover:text-foreground",
-    menuButton: `${light} hover:bg-surface`,
-    brandText: light,
+    menuButton: "text-foreground hover:bg-surface",
+    brandText: "text-foreground",
     brandDot: "bg-foreground",
     desktopList: "hidden items-center gap-7 md:flex",
   },
-  inverse: {
-    shell: "border-b border-white/10 bg-[#101010]/85 backdrop-blur-md",
-    bar: "mx-auto max-w-6xl px-5 sm:px-8",
-    header: "px-0",
-    link: "text-on-secondary/60 hover:text-on-secondary",
-    mobilePanel: "border-t border-white/10 bg-[#101010]",
-    mobileLink:
-      "text-on-secondary/70 hover:bg-white/10 hover:text-on-secondary",
-    menuButton: `${inverse} hover:bg-white/10`,
-    brandText: inverse,
-    brandDot: "bg-on-secondary",
-    desktopList: "hidden items-center gap-7 md:flex",
-  },
+};
+
+/**
+ * On an emphasis (custom-background) bar everything inherits the resolved
+ * contrast color instead of the page's --color-foreground/--color-border tokens.
+ */
+const emphatic: NavbarStyle = {
+  shell: "",
+  bar: "mx-auto max-w-6xl px-5 sm:px-8",
+  header: "px-0",
+  link: "text-current/70 hover:text-current",
+  mobilePanel: "border-t border-current/15",
+  mobileLink: "text-current/70 hover:bg-current/10 hover:text-current",
+  menuButton: "text-current hover:bg-current/10",
+  brandText: "text-current",
+  brandDot: "bg-current",
+  desktopList: "hidden items-center gap-7 md:flex",
 };
 
 export const Navbar = ({
@@ -77,12 +79,15 @@ export const Navbar = ({
   cta,
   languageSwitcher,
   sticky = true,
+  background,
   LinkComponent,
+  style,
   ...props
 }: NavbarProps) => {
   const [open, setOpen] = useState(false);
   const Link = LinkComponent ?? "a";
-  const s = styles[variant];
+  const s = background ? emphatic : styles[variant];
+  const floating = !background && variant === "floating";
 
   const logoNode =
     logo ??
@@ -104,7 +109,18 @@ export const Navbar = ({
   );
 
   return (
-    <header className={cn("w-full transition-colors duration-200", sticky && "sticky top-0 z-50", s.shell, s.header, className)} {...props}>
+    <header
+      data-emphasis={background ? "" : undefined}
+      style={background ? { ...emphasisSurfaceStyle(background), ...style } : style}
+      className={cn(
+        "w-full transition-colors duration-200",
+        sticky && "sticky top-0 z-50",
+        s.shell,
+        s.header,
+        className,
+      )}
+      {...props}
+    >
       <nav className={cn("flex h-16 w-full items-center justify-between gap-4 transition-colors duration-200", s.bar)} aria-label="Main navigation">
         <Link href={brandHref} className="shrink-0">
           {brandNode}
@@ -151,10 +167,11 @@ export const Navbar = ({
           "grid transition-[grid-template-rows,opacity] duration-200 md:hidden",
           open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
           s.mobilePanel,
+          background && "bg-transparent",
         )}
       >
         <div className="min-h-0 overflow-hidden">
-          <ul className={cn("flex flex-col py-4", variant !== "floating" && "px-5")}>
+          <ul className={cn("flex flex-col py-4", !floating && "px-5")}>
             {languageSwitcher ? (
               <li className="px-2 pb-4">{languageSwitcher}</li>
             ) : null}

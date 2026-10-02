@@ -1,22 +1,26 @@
 import { forwardRef } from "react";
 import { cn } from "../../../utils/cn";
 import { Container } from "../../Container";
-import { CTAActions } from "../parts";
+import { emphasisSurfaceStyle } from "../../../utils/surface";
+import { CTAActions, ctaDescriptionBase, ctaTitleBase } from "../parts";
 import type { CTAProps } from "../types";
 
-/** panel — brand gradient panel, rounded corners. */
+/**
+ * panel — brand emphasis panel: a gradient derived from `--color-primary`,
+ * with a shared grain texture. Passing `background` replaces the gradient with
+ * a custom color while keeping the contrast behavior.
+ */
 export const CTAPanel = forwardRef<HTMLElement, CTAProps>(
-  ({ className, title, description, action, secondaryAction, align = "left", id, ...props }, ref) => {
+  (
+    { className, title, description, action, secondaryAction, align = "left", background, id, ...props },
+    ref,
+  ) => {
     return (
       <section ref={ref} id={id} className={cn("w-full py-6 pb-20", className)} {...props}>
         <Container>
           <div
             className="relative overflow-hidden rounded-[1.75rem] px-7 py-14 sm:px-14 sm:py-20"
-            style={{
-              background:
-                "radial-gradient(120% 160% at 0% 0%, rgb(var(--color-primary)), rgb(var(--color-primary-hover)) 55%, rgb(var(--color-primary) / 0.85))",
-              color: "contrast-color(rgb(var(--color-primary)))",
-            }}
+            style={emphasisSurfaceStyle(background)}
           >
             <div aria-hidden className="pointer-events-none absolute inset-0 grain opacity-[0.07] mix-blend-overlay" />
             <div
@@ -31,21 +35,19 @@ export const CTAPanel = forwardRef<HTMLElement, CTAProps>(
               )}
             >
               <div className={cn("max-w-2xl", align === "center" && "mx-auto")}>
-                <h2 className="font-display text-balance text-3xl font-semibold leading-[1.06] tracking-[-0.02em] sm:text-5xl">
-                  {title}
-                </h2>
+                <h2 className={ctaTitleBase}>{title}</h2>
                 {description ? (
                   <p
                     className={cn(
-                      "mt-4 text-pretty text-base leading-7 sm:text-lg",
-                      align === "center" && "mx-auto max-w-xl",
+                      ctaDescriptionBase,
+                      align === "center" && "mx-auto",
                     )}
                   >
                     {description}
                   </p>
                 ) : null}
               </div>
-              <CTAActions action={action} secondaryAction={secondaryAction} align={align} />
+              <CTAActions action={action} secondaryAction={secondaryAction} align={align} emphasis />
             </div>
           </div>
         </Container>

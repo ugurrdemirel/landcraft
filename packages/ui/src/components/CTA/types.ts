@@ -1,6 +1,7 @@
 import type { HTMLAttributes, ReactNode } from "react";
 
-export type CTAOption = "panel" | "surface" | "inverse";
+/** Layout options — arrangement only. Emphasis tone is the `background` prop. */
+export type CTAOption = "panel" | "surface";
 
 export interface CTAProps extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   title: ReactNode;
@@ -9,4 +10,10 @@ export interface CTAProps extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   secondaryAction?: ReactNode;
   option?: CTAOption;
   align?: "left" | "center";
+  /**
+   * Overrides the emphasis (`panel`) surface with any CSS color; the text color
+   * is derived for contrast via CSS `contrast-color()`. Ignored by `surface`,
+   * which sits on the page background.
+   */
+  background?: string;
 }

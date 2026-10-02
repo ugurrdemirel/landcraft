@@ -1,12 +1,30 @@
 import { forwardRef } from "react";
 import { cn } from "../../../utils/cn";
-import { HeroActions, HeroEyebrow, heroContainer, heroTitleBase } from "../parts";
+import {
+  HeroActions,
+  HeroEyebrow,
+  heroContainer,
+  heroDescriptionBase,
+  heroTitleType,
+} from "../parts";
 import type { HeroProps } from "../types";
 
 /** Centered — understated, one statement, generous white space. */
 export const HeroCentered = forwardRef<HTMLElement, HeroProps>(
   (
-    { className, eyebrow, title, description, primaryAction, secondaryAction, media, meta, id, ...props },
+    {
+      className,
+      eyebrow,
+      title,
+      description,
+      primaryAction,
+      secondaryAction,
+      media,
+      meta,
+      background,
+      id,
+      ...props
+    },
     ref,
   ) => (
     <section
@@ -17,11 +35,11 @@ export const HeroCentered = forwardRef<HTMLElement, HeroProps>(
     >
       <div className={cn(heroContainer, "pt-24 pb-20 text-center sm:pt-32 sm:pb-24")}>
         <HeroEyebrow eyebrow={eyebrow} />
-        <h1 className={cn(heroTitleBase, "mt-7 max-w-4xl text-5xl leading-[1.04] sm:text-6xl lg:text-7xl")}>
+        <h1 className={cn(heroTitleType, "mt-7 max-w-4xl text-5xl text-foreground sm:text-6xl lg:text-7xl")}>
           {title}
         </h1>
         {description ? (
-          <p className="mx-auto mt-7 max-w-xl text-pretty leading-relaxed text-muted-foreground sm:text-lg">
+          <p className={cn(heroDescriptionBase, "mx-auto mt-7 max-w-xl text-muted-foreground")}>
             {description}
           </p>
         ) : null}

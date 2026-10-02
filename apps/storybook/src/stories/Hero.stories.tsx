@@ -171,7 +171,7 @@ export const Option4_Parallax: Story = {
   },
 };
 
-/** Option 3 · Statement — full-width ink band. No eyebrow, just the message. */
+/** Option 3 · Statement — full-width brand emphasis band. No eyebrow, just the message. */
 export const Option3_Statement: Story = {
   name: "Option 3 · Statement",
   args: {
@@ -179,15 +179,15 @@ export const Option3_Statement: Story = {
     eyebrow: undefined,
     title: <>Build. Ship. <span style={{ fontStyle: "italic" }}>Grow.</span></>,
     description:
-      "The landing page grind is over. Text color is computed from the --color-secondary token; readable in every palette.",
+      "The landing page grind is over. Text color is computed from the --color-primary token; readable in every palette.",
     primaryAction: (
       <Button size="lg" className="bg-surface text-foreground hover:bg-surface-strong" iconRight={<ArrowRight className="h-4 w-4" />}>
         Get started
       </Button>
     ),
     secondaryAction: (
-      <Button size="lg" variant="outline" className="border-white/25 text-current hover:bg-white/10">
-        Contact us
+      <Button size="lg" variant="outline" iconLeft={<Play className="h-4 w-4" />}>
+        Live demo
       </Button>
     ),
   },
@@ -195,8 +195,33 @@ export const Option3_Statement: Story = {
     layout: "fullscreen",
     docs: {
       description: {
-        story: "Full-width ink statement block. No eyebrow shown on top.",
+        story:
+          "Full-width brand emphasis band derived from --color-primary. Text contrast is computed in CSS; pass `background` to use a custom color instead.",
       },
     },
   },
+};
+
+/** The same statement layout with a consumer-chosen background instead of the brand gradient. */
+export const StatementCustomBackground: Story = {
+  name: "Statement · custom background",
+  args: {
+    variant: "statement",
+    eyebrow: undefined,
+    background: "#101010",
+    title: "Your brand, your surface.",
+    description:
+      "Pass `background` any CSS color and the text color follows via contrast-color(). No ink variant required.",
+    primaryAction: (
+      <Button size="lg" className="bg-surface text-foreground hover:bg-surface-strong" iconRight={<ArrowRight className="h-4 w-4" />}>
+        Get started
+      </Button>
+    ),
+    secondaryAction: (
+      <Button size="lg" variant="outline" iconLeft={<Play className="h-4 w-4" />}>
+        Live demo
+      </Button>
+    ),
+  },
+  parameters: { layout: "fullscreen" },
 };

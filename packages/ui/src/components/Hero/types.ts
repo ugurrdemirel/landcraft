@@ -35,4 +35,10 @@ export interface HeroProps extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   meta?: HeroMeta[];
   /** Floating logo tiles with a mouse parallax effect (`parallax` variant). */
   logos?: HeroLogo[];
+  /**
+   * Overrides the emphasis (`statement`) band with any CSS color; the text color
+   * is derived for contrast via CSS `contrast-color()`. Layouts on the page
+   * background are unaffected.
+   */
+  background?: string;
 }

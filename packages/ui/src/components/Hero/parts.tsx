@@ -3,8 +3,16 @@ import type { ReactNode } from "react";
 export const heroContainer =
   "relative mx-auto flex w-full max-w-6xl flex-col items-center px-5 sm:px-8";
 
-export const heroTitleBase =
-  "font-display font-semibold tracking-[-0.03em] text-balance text-foreground";
+/**
+ * Shared display type for every hero layout. Layouts add their own color
+ * (`text-foreground` on paper, inherited contrast color on the emphasis band)
+ * and size, but never re-declare the family, weight, leading or tracking.
+ */
+export const heroTitleType =
+  "font-display font-semibold leading-[1.04] tracking-[-0.03em] text-balance";
+
+/** Shared supporting-copy type; layouts add their own color. */
+export const heroDescriptionBase = "text-pretty leading-relaxed sm:text-lg";
 
 export function HeroEyebrow({ eyebrow }: { eyebrow?: ReactNode }) {
   if (typeof eyebrow === "string") {
@@ -20,10 +28,18 @@ export function HeroEyebrow({ eyebrow }: { eyebrow?: ReactNode }) {
 export function HeroActions({
   primaryAction,
   secondaryAction,
+  emphasis = false,
 }: {
   primaryAction?: ReactNode;
   secondaryAction?: ReactNode;
+  /** Marks the actions as sitting on an emphasis band so descendant buttons inherit its contrast color. */
+  emphasis?: boolean;
 }) {
   if (!primaryAction && !secondaryAction) return null;
-  return <div className="flex flex-wrap items-center gap-4">{primaryAction}{secondaryAction}</div>;
+  return (
+    <div data-emphasis={emphasis ? "" : undefined} className="flex flex-wrap items-center gap-4">
+      {primaryAction}
+      {secondaryAction}
+    </div>
+  );
 }

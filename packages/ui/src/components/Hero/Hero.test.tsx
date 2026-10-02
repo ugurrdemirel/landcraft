@@ -51,12 +51,46 @@ describe("Hero", () => {
     expect(screen.getByTestId("m")).toBeInTheDocument();
   });
 
-  it("renders the statement variant as an ink band with a grain overlay", () => {
+  it("renders the statement variant as a brand emphasis band with a grain overlay", () => {
     const { container } = render(<Hero {...base} variant="statement" />);
     const section = container.querySelector("section");
-    expect(section).toHaveClass("bg-secondary");
+    // Emphasis is derived from the primary token, never a hard-coded ink surface.
+    expect(section).toHaveAttribute(
+      "style",
+      expect.stringContaining("contrast-color(rgb(var(--color-primary)))"),
+    );
+    expect(section).not.toHaveClass("bg-secondary");
     // Statement paints a grain overlay div.
     expect(container.querySelector(".grain")).toBeInTheDocument();
+  });
+
+  it("overrides the statement band with a custom background", () => {
+    const { container } = render(<Hero {...base} variant="statement" background="#101010" />);
+    const section = container.querySelector("section");
+    expect(section).toHaveAttribute("style", expect.stringContaining("--lc-bg: #101010"));
+    expect(section).toHaveAttribute(
+      "style",
+      expect.stringContaining("color: contrast-color(var(--lc-bg))"),
+    );
+  });
+
+  it("marks the statement actions so descendant buttons inherit the band's contrast color", () => {
+    const { container } = render(
+      <Hero {...base} variant="statement" primaryAction={<a href="#a">Go</a>} />,
+    );
+    expect(container.querySelector("[data-emphasis]")).toBeInTheDocument();
+  });
+
+  it("does not mark actions on page-background layouts as an emphasis scope", () => {
+    const { container } = render(
+      <Hero {...base} variant="split" primaryAction={<a href="#a">Go</a>} />,
+    );
+    expect(container.querySelector("[data-emphasis]")).not.toBeInTheDocument();
+  });
+
+  it("does not leak an unused background prop onto the DOM", () => {
+    const { container } = render(<Hero {...base} background="#101010" />);
+    expect(container.querySelector("section")).not.toHaveAttribute("background");
   });
 
   it("renders the parallax variant with centered copy on a plain background", () => {
